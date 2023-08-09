@@ -42,7 +42,7 @@ Coordinates QuickSort(Coordinates Coordinates, int Up, int Down)
 
 void Swap(Coordinates Coordinates1, Coordinates Coordinates2)
 {
-	struct Grid_WORD_COORDINATES temp;
+	struct GridCOORDINATES temp;
 
     temp.length = Coordinates1->length;
     temp.word_possibilities = Coordinates1->word_possibilities;

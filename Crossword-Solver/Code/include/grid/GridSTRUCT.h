@@ -11,7 +11,7 @@ typedef struct GridSTRUCT* Grid;
 typedef struct GridHORIZONTALLY* Horizontally;
 typedef struct GridVERTICALLY* Vertically;
 typedef struct GridLENGTHS* Lengths;                
-typedef struct Grid_WORD_COORDINATES* Coordinates;
+typedef struct GridCOORDINATES* Coordinates;
 typedef struct GridINTERSECTIONS* Intersections;
 
 //-------------------------------------- VISUALIZATION ----------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ struct GridLENGTHS
     bool* length_exists;                // boolean array that holds all the different lengths between the MinLength and MaxLength
 }; 
 
-struct Grid_WORD_COORDINATES                   
+struct GridCOORDINATES                   
 {
     int length;                         // length of word the area can hold
     int word_possibilities;             // number of all possible words that can fit in each gap 

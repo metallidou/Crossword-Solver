@@ -96,7 +96,7 @@ char** VisualizeResult(Grid DataGrid, GridVisual VisualGrid)
         for(int j = 0; j < DataGrid->horizontally->coordinates[i].length; j++)
         {
             if(DataGrid->horizontally->coordinates[i].solution->filled == true) 
-                result[row][temp+j] = DataGrid->horizontally->coordinates[i].solution->word_placed[j];
+                result[row][temp+j] = DataGrid->horizontally->coordinates[i].solution->word[j];
             else
                 result[row][temp+j] = '+';
         }
@@ -104,15 +104,15 @@ char** VisualizeResult(Grid DataGrid, GridVisual VisualGrid)
 
     for(int i = 0; i < DataGrid->horizontally->words_count; i++)
     {
-        printf("row %d horizontally %s flag %d ", DataGrid->horizontally->coordinates[i].start_row, DataGrid->horizontally->coordinates[i].solution->word_placed, DataGrid->horizontally->coordinates[i].flag);
+        printf("row %d horizontally %s flag %d ", DataGrid->horizontally->coordinates[i].start_row, DataGrid->horizontally->coordinates[i].solution->word, DataGrid->horizontally->coordinates[i].flag);
         if(DataGrid->horizontally->coordinates[i].solution->constraints)
         {
             printf("constraints ");
 
             for(int k = 0; k < DataGrid->horizontally->coordinates[i].length; k++)
             {
-                if(DataGrid->horizontally->coordinates[i].solution->has_constraints->constrained_letter[k])
-                    printf("%c", DataGrid->horizontally->coordinates[i].solution->has_constraints->constraints[k]);
+                if(DataGrid->horizontally->coordinates[i].solution->constraints->letters[k] != ' ')
+                    printf("%c", DataGrid->horizontally->coordinates[i].solution->constraints->letters[k]);
                 else
                     printf("*");
             }
@@ -123,14 +123,14 @@ char** VisualizeResult(Grid DataGrid, GridVisual VisualGrid)
     }
     for(int j = 0; j < DataGrid->vertically->words_count; j++)
     {
-        printf("col %d vertically %s flag %d ", DataGrid->vertically->coordinates[j].start_col, DataGrid->vertically->coordinates[j].solution->word_placed, DataGrid->vertically->coordinates[j].flag);
+        printf("col %d vertically %s flag %d ", DataGrid->vertically->coordinates[j].start_col, DataGrid->vertically->coordinates[j].solution->word, DataGrid->vertically->coordinates[j].flag);
         if(DataGrid->vertically->coordinates[j].solution->constraints)
         {
             printf("constraints ");
             for(int k = 0; k < DataGrid->vertically->coordinates[j].length; k++)
             {
-                if(DataGrid->vertically->coordinates[j].solution->has_constraints->constrained_letter[k])
-                    printf("%c", DataGrid->vertically->coordinates[j].solution->has_constraints->constraints[k]);
+                if(DataGrid->vertically->coordinates[j].solution->constraints->letters[k] != ' ')
+                    printf("%c", DataGrid->vertically->coordinates[j].solution->constraints->letters[k]);
                 else
                     printf("*");
             }

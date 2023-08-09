@@ -3,52 +3,51 @@ Flat profile:
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
  time   seconds   seconds    calls   s/call   s/call  name    
- 41.88      4.01     4.01 49557213     0.00     0.00  RemoveConstraintsHorizontally
- 11.85      5.15     1.14 49557969     0.00     0.00  AddConstraintsHorizontally
-  6.27      5.75     0.60 100000000     0.00     0.00  GetGapToFill
-  6.06      6.33     0.58   448875     0.00     0.00  PutWordsOnVector
-  5.74      6.88     0.55 49999244     0.00     0.00  GetFaultyGap
-  4.49      7.31     0.43 50000756     0.00     0.00  PlaceWord
-  4.13      7.70     0.40 49999244     0.00     0.00  Backtracking
-  3.86      8.07     0.37 100000000     0.00     0.00  ChooseWordToFillGap
-  3.34      8.39     0.32 50437841     0.00     0.00  RemoveWord
-  1.88      8.57     0.18        1     0.18     9.58  FillGaps
-  1.72      8.74     0.17 49999244     0.00     0.00  RemoveAffectedWords
-  1.67      8.90     0.16 200437085     0.00     0.00  IsHorizontalGap
-  1.51      9.05     0.15 50437841     0.00     0.00  RemoveConstraints
-  1.20      9.16     0.12 50000756     0.00     0.00  AddConstraints
-  1.15      9.27     0.11 100897517     0.00     0.00  VectorEmpty
-  1.04      9.37     0.10 50033290     0.00     0.00  VectorInsert
-  0.94      9.46     0.09 49999891     0.00     0.00  VectorRemove
-  0.63      9.52     0.06 100000000     0.00     0.00  GapHasConstraints
-  0.52      9.57     0.05   880628     0.00     0.00  RemoveConstraintsVertically
-  0.10      9.58     0.01      562     0.00     0.00  VectorInitialize
-  0.05      9.59     0.01   442787     0.00     0.00  AddConstraintsVertically
-  0.00      9.59     0.00    24952     0.00     0.00  AddToHashTable
-  0.00      9.59     0.00       19     0.00     0.00  IsInteger
-  0.00      9.59     0.00       13     0.00     0.00  ReadNumber
-  0.00      9.59     0.00        6     0.00     0.00  GetCoordinates
-  0.00      9.59     0.00        4     0.00     0.00  Swap
-  0.00      9.59     0.00        2     0.00     0.00  QuickSort
-  0.00      9.59     0.00        1     0.00     0.00  CreateGridVisualization
-  0.00      9.59     0.00        1     0.00     0.01  CreateHashTable
-  0.00      9.59     0.00        1     0.00     0.00  GapLengthsVertically
-  0.00      9.59     0.00        1     0.00     0.00  GapsLengthsHorizontally
-  0.00      9.59     0.00        1     0.00     0.00  GetBlackBoxes
-  0.00      9.59     0.00        1     0.00     0.00  GetGridDimensions
-  0.00      9.59     0.00        1     0.00     0.00  Initialize
-  0.00      9.59     0.00        1     0.00     0.00  IntersectionsHorizontally
-  0.00      9.59     0.00        1     0.00     0.00  IntersectionsVertically
-  0.00      9.59     0.00        1     0.00     0.00  NumberWordsFitHorizontally
-  0.00      9.59     0.00        1     0.00     0.00  NumberWordsFitVertically
-  0.00      9.59     0.00        1     0.00     0.00  PrintResult
-  0.00      9.59     0.00        1     0.00     0.01  ProcessDictionary
-  0.00      9.59     0.00        1     0.00     0.00  ProcessGridData
-  0.00      9.59     0.00        1     0.00     0.00  SetFlags
-  0.00      9.59     0.00        1     0.00     9.58  Solve
-  0.00      9.59     0.00        1     0.00     0.00  Sort
-  0.00      9.59     0.00        1     0.00     0.00  UpdateDataGrid
-  0.00      9.59     0.00        1     0.00     0.00  VisualizeResult
+ 85.88     22.44    22.44 50000000     0.00     0.00  GetWord
+  2.74     23.16     0.72 25000009     0.00     0.00  SetWordsVector
+  1.55     23.56     0.41 24999991     0.00     0.00  RemoveAffectedWords
+  1.55     23.97     0.41 11112659     0.00     0.00  RemoveConstraintsVertically
+  1.42     24.34     0.37 11112668     0.00     0.00  AddConstraintsVertically
+  1.19     24.65     0.31 13887341     0.00     0.00  AddConstraintsHorizontally
+  0.90     24.88     0.24 13887332     0.00     0.00  RemoveConstraintsHorizontally
+  0.88     25.11     0.23 50000000     0.00     0.00  ChooseWordToFillGap
+  0.88     25.34     0.23 50000000     0.00     0.00  GetGapToFill
+  0.77     25.54     0.20 24999991     0.00     0.00  GetFaultyGap
+  0.73     25.73     0.19 24999991     0.00     0.00  Backtracking
+  0.54     25.87     0.14 24999991     0.00     0.00  RemoveWord
+  0.31     25.95     0.08 25000009     0.00     0.00  AddConstraints
+  0.25     26.02     0.07 99999982     0.00     0.00  IsHorizontalGap
+  0.23     26.08     0.06 25000009     0.00     0.00  PlaceWord
+  0.23     26.14     0.06        1     0.06    26.15  SolveCrossword
+  0.04     26.15     0.01 24999991     0.00     0.00  RemoveConstraints
+  0.00     26.15     0.00   155813     0.00     0.00  VectorInsert
+  0.00     26.15     0.00    24952     0.00     0.00  AddToHashTable
+  0.00     26.15     0.00     1440     0.00     0.00  VectorInitialize
+  0.00     26.15     0.00       88     0.00     0.00  IsInteger
+  0.00     26.15     0.00       59     0.00     0.00  ReadNumber
+  0.00     26.15     0.00       29     0.00     0.00  GetCoordinates
+  0.00     26.15     0.00       12     0.00     0.00  Swap
+  0.00     26.15     0.00        2     0.00     0.00  QuickSort
+  0.00     26.15     0.00        1     0.00     0.00  CreateGridVisualization
+  0.00     26.15     0.00        1     0.00     0.00  CreateHashTable
+  0.00     26.15     0.00        1     0.00     0.00  FlagsInitialize
+  0.00     26.15     0.00        1     0.00     0.00  GapLengthsVertically
+  0.00     26.15     0.00        1     0.00     0.00  GapsLengthsHorizontally
+  0.00     26.15     0.00        1     0.00     0.00  GetBlackBoxes
+  0.00     26.15     0.00        1     0.00     0.00  GetGridDimensions
+  0.00     26.15     0.00        1     0.00     0.00  Initialize
+  0.00     26.15     0.00        1     0.00     0.00  IntersectionsHorizontally
+  0.00     26.15     0.00        1     0.00     0.00  IntersectionsVertically
+  0.00     26.15     0.00        1     0.00     0.00  NumberWordsFitHorizontally
+  0.00     26.15     0.00        1     0.00     0.00  NumberWordsFitVertically
+  0.00     26.15     0.00        1     0.00     0.00  PrintResult
+  0.00     26.15     0.00        1     0.00     0.00  ProcessDictionary
+  0.00     26.15     0.00        1     0.00     0.00  ProcessGridData
+  0.00     26.15     0.00        1     0.00     0.00  SetGapsFillingOrder
+  0.00     26.15     0.00        1     0.00    26.15  Solve
+  0.00     26.15     0.00        1     0.00     0.00  Sort
+  0.00     26.15     0.00        1     0.00     0.00  UpdateDataGrid
+  0.00     26.15     0.00        1     0.00     0.00  VisualizeResult
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -86,213 +85,201 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 2 byte(s) for 0.10% of 9.59 seconds
+granularity: each sample hit covers 2 byte(s) for 0.04% of 26.15 seconds
 
 index % time    self  children    called     name
+                0.00   26.15       1/1           main [3]
+[1]    100.0    0.00   26.15       1         Solve [1]
+                0.06   26.09       1/1           SolveCrossword [2]
+                0.00    0.00       1/1           Sort [44]
+                0.00    0.00       1/1           Initialize [35]
+                0.00    0.00       1/1           FlagsInitialize [30]
+                0.00    0.00       1/1           IntersectionsHorizontally [36]
+                0.00    0.00       1/1           IntersectionsVertically [37]
+                0.00    0.00       1/1           SetGapsFillingOrder [43]
+-----------------------------------------------
+                0.06   26.09       1/1           Solve [1]
+[2]    100.0    0.06   26.09       1         SolveCrossword [2]
+                0.23   25.86 50000000/50000000     GetGapToFill [4]
+-----------------------------------------------
                                                  <spontaneous>
-[1]    100.0    0.00    9.59                 main [1]
-                0.00    9.58       1/1           Solve [2]
-                0.00    0.01       1/1           ProcessDictionary [23]
-                0.00    0.00       1/1           CreateGridVisualization [33]
-                0.00    0.00       1/1           ProcessGridData [43]
-                0.00    0.00       1/1           PrintResult [42]
-                0.00    0.00       1/1           VisualizeResult [47]
+[3]    100.0    0.00   26.15                 main [3]
+                0.00   26.15       1/1           Solve [1]
+                0.00    0.00       1/1           CreateGridVisualization [28]
+                0.00    0.00       1/1           ProcessGridData [42]
+                0.00    0.00       1/1           ProcessDictionary [41]
+                0.00    0.00       1/1           PrintResult [40]
+                0.00    0.00       1/1           VisualizeResult [46]
 -----------------------------------------------
-                0.00    9.58       1/1           main [1]
-[2]     99.9    0.00    9.58       1         Solve [2]
-                0.18    9.40       1/1           FillGaps [3]
-                0.00    0.00       1/1           Initialize [26]
-                0.00    0.00       1/1           Sort [45]
-                0.00    0.00       1/1           IntersectionsHorizontally [38]
-                0.00    0.00       1/1           IntersectionsVertically [39]
-                0.00    0.00       1/1           SetFlags [44]
+                0.23   25.86 50000000/50000000     SolveCrossword [2]
+[4]     99.8    0.23   25.86 50000000         GetGapToFill [4]
+                0.23   25.63 50000000/50000000     ChooseWordToFillGap [5]
 -----------------------------------------------
-                0.18    9.40       1/1           Solve [2]
-[3]     99.9    0.18    9.40       1         FillGaps [3]
-                0.60    8.79 100000000/100000000     GetGapToFill [4]
+                0.23   25.63 50000000/50000000     GetGapToFill [4]
+[5]     98.9    0.23   25.63 50000000         ChooseWordToFillGap [5]
+               22.44    0.72 50000000/50000000     GetWord [6]
+                0.19    1.44 24999991/24999991     Backtracking [7]
+                0.06    0.78 25000009/25000009     PlaceWord [8]
 -----------------------------------------------
-                0.60    8.79 100000000/100000000     FillGaps [3]
-[4]     98.0    0.60    8.79 100000000         GetGapToFill [4]
-                0.37    8.42 100000000/100000000     ChooseWordToFillGap [5]
+               22.44    0.72 50000000/50000000     ChooseWordToFillGap [5]
+[6]     88.6   22.44    0.72 50000000         GetWord [6]
+                0.72    0.00 25000009/25000009     SetWordsVector [11]
 -----------------------------------------------
-                0.37    8.42 100000000/100000000     GetGapToFill [4]
-[5]     91.8    0.37    8.42 100000000         ChooseWordToFillGap [5]
-                0.40    5.36 49999244/49999244     Backtracking [6]
-                0.43    1.30 50000756/50000756     PlaceWord [10]
-                0.58    0.10  448875/448875      PutWordsOnVector [13]
-                0.09    0.05 49999891/49999891     VectorRemove [17]
-                0.06    0.00 100000000/100000000     GapHasConstraints [20]
-                0.06    0.00 50897626/100897517     VectorEmpty [18]
+                0.19    1.44 24999991/24999991     ChooseWordToFillGap [5]
+[7]      6.3    0.19    1.44 24999991         Backtracking [7]
+                0.14    0.67 24999991/24999991     RemoveWord [9]
+                0.41    0.02 24999991/24999991     RemoveAffectedWords [13]
+                0.20    0.02 24999991/24999991     GetFaultyGap [18]
 -----------------------------------------------
-                0.40    5.36 49999244/49999244     ChooseWordToFillGap [5]
-[6]     60.1    0.40    5.36 49999244         Backtracking [6]
-                0.32    4.21 49999244/50437841     RemoveWord [7]
-                0.55    0.04 49999244/49999244     GetFaultyGap [14]
-                0.17    0.08 49999244/49999244     RemoveAffectedWords [15]
+                0.06    0.78 25000009/25000009     ChooseWordToFillGap [5]
+[8]      3.2    0.06    0.78 25000009         PlaceWord [8]
+                0.08    0.70 25000009/25000009     AddConstraints [10]
 -----------------------------------------------
-                0.00    0.04  438597/50437841     RemoveAffectedWords [15]
-                0.32    4.21 49999244/50437841     Backtracking [6]
-[7]     47.7    0.32    4.25 50437841         RemoveWord [7]
-                0.15    4.10 50437841/50437841     RemoveConstraints [8]
+                0.14    0.67 24999991/24999991     Backtracking [7]
+[9]      3.1    0.14    0.67 24999991         RemoveWord [9]
+                0.01    0.66 24999991/24999991     RemoveConstraints [12]
 -----------------------------------------------
-                0.15    4.10 50437841/50437841     RemoveWord [7]
-[8]     44.3    0.15    4.10 50437841         RemoveConstraints [8]
-                4.01    0.00 49557213/49557213     RemoveConstraintsHorizontally [9]
-                0.05    0.00  880628/880628      RemoveConstraintsVertically [21]
-                0.04    0.00 50437841/200437085     IsHorizontalGap [16]
+                0.08    0.70 25000009/25000009     PlaceWord [8]
+[10]     3.0    0.08    0.70 25000009         AddConstraints [10]
+                0.37    0.00 11112668/11112668     AddConstraintsVertically [15]
+                0.31    0.00 13887341/13887341     AddConstraintsHorizontally [16]
+                0.02    0.00 25000009/99999982     IsHorizontalGap [19]
 -----------------------------------------------
-                4.01    0.00 49557213/49557213     RemoveConstraints [8]
-[9]     41.9    4.01    0.00 49557213         RemoveConstraintsHorizontally [9]
+                0.72    0.00 25000009/25000009     GetWord [6]
+[11]     2.7    0.72    0.00 25000009         SetWordsVector [11]
 -----------------------------------------------
-                0.43    1.30 50000756/50000756     ChooseWordToFillGap [5]
-[10]    18.0    0.43    1.30 50000756         PlaceWord [10]
-                0.12    1.18 50000756/50000756     AddConstraints [11]
+                0.01    0.66 24999991/24999991     RemoveWord [9]
+[12]     2.5    0.01    0.66 24999991         RemoveConstraints [12]
+                0.41    0.00 11112659/11112659     RemoveConstraintsVertically [14]
+                0.24    0.00 13887332/13887332     RemoveConstraintsHorizontally [17]
+                0.02    0.00 24999991/99999982     IsHorizontalGap [19]
 -----------------------------------------------
-                0.12    1.18 50000756/50000756     PlaceWord [10]
-[11]    13.5    0.12    1.18 50000756         AddConstraints [11]
-                1.14    0.00 49557969/49557969     AddConstraintsHorizontally [12]
-                0.04    0.00 50000756/200437085     IsHorizontalGap [16]
-                0.01    0.00  442787/442787      AddConstraintsVertically [25]
+                0.41    0.02 24999991/24999991     Backtracking [7]
+[13]     1.6    0.41    0.02 24999991         RemoveAffectedWords [13]
+                0.02    0.00 24999991/99999982     IsHorizontalGap [19]
 -----------------------------------------------
-                1.14    0.00 49557969/49557969     AddConstraints [11]
-[12]    11.8    1.14    0.00 49557969         AddConstraintsHorizontally [12]
+                0.41    0.00 11112659/11112659     RemoveConstraints [12]
+[14]     1.5    0.41    0.00 11112659         RemoveConstraintsVertically [14]
 -----------------------------------------------
-                0.58    0.10  448875/448875      ChooseWordToFillGap [5]
-[13]     7.1    0.58    0.10  448875         PutWordsOnVector [13]
-                0.10    0.00 50000129/50033290     VectorInsert [19]
+                0.37    0.00 11112668/11112668     AddConstraints [10]
+[15]     1.4    0.37    0.00 11112668         AddConstraintsVertically [15]
 -----------------------------------------------
-                0.55    0.04 49999244/49999244     Backtracking [6]
-[14]     6.2    0.55    0.04 49999244         GetFaultyGap [14]
-                0.04    0.00 49999244/200437085     IsHorizontalGap [16]
+                0.31    0.00 13887341/13887341     AddConstraints [10]
+[16]     1.2    0.31    0.00 13887341         AddConstraintsHorizontally [16]
 -----------------------------------------------
-                0.17    0.08 49999244/49999244     Backtracking [6]
-[15]     2.6    0.17    0.08 49999244         RemoveAffectedWords [15]
-                0.04    0.00 49999244/200437085     IsHorizontalGap [16]
-                0.00    0.04  438597/50437841     RemoveWord [7]
+                0.24    0.00 13887332/13887332     RemoveConstraints [12]
+[17]     0.9    0.24    0.00 13887332         RemoveConstraintsHorizontally [17]
 -----------------------------------------------
-                0.04    0.00 49999244/200437085     RemoveAffectedWords [15]
-                0.04    0.00 49999244/200437085     GetFaultyGap [14]
-                0.04    0.00 50000756/200437085     AddConstraints [11]
-                0.04    0.00 50437841/200437085     RemoveConstraints [8]
-[16]     1.7    0.16    0.00 200437085         IsHorizontalGap [16]
+                0.20    0.02 24999991/24999991     Backtracking [7]
+[18]     0.8    0.20    0.02 24999991         GetFaultyGap [18]
+                0.02    0.00 24999991/99999982     IsHorizontalGap [19]
 -----------------------------------------------
-                0.09    0.05 49999891/49999891     ChooseWordToFillGap [5]
-[17]     1.5    0.09    0.05 49999891         VectorRemove [17]
-                0.05    0.00 49999891/100897517     VectorEmpty [18]
+                0.02    0.00 24999991/99999982     GetFaultyGap [18]
+                0.02    0.00 24999991/99999982     RemoveConstraints [12]
+                0.02    0.00 24999991/99999982     RemoveAffectedWords [13]
+                0.02    0.00 25000009/99999982     AddConstraints [10]
+[19]     0.2    0.07    0.00 99999982         IsHorizontalGap [19]
 -----------------------------------------------
-                0.05    0.00 49999891/100897517     VectorRemove [17]
-                0.06    0.00 50897626/100897517     ChooseWordToFillGap [5]
-[18]     1.1    0.11    0.00 100897517         VectorEmpty [18]
+                0.00    0.00  155813/155813      AddToHashTable [21]
+[20]     0.0    0.00    0.00  155813         VectorInsert [20]
 -----------------------------------------------
-                0.00    0.00   33161/50033290     AddToHashTable [27]
-                0.10    0.00 50000129/50033290     PutWordsOnVector [13]
-[19]     1.0    0.10    0.00 50033290         VectorInsert [19]
+                0.00    0.00   24952/24952       ProcessDictionary [41]
+[21]     0.0    0.00    0.00   24952         AddToHashTable [21]
+                0.00    0.00  155813/155813      VectorInsert [20]
 -----------------------------------------------
-                0.06    0.00 100000000/100000000     ChooseWordToFillGap [5]
-[20]     0.6    0.06    0.00 100000000         GapHasConstraints [20]
+                0.00    0.00    1440/1440        CreateHashTable [29]
+[22]     0.0    0.00    0.00    1440         VectorInitialize [22]
 -----------------------------------------------
-                0.05    0.00  880628/880628      RemoveConstraints [8]
-[21]     0.5    0.05    0.00  880628         RemoveConstraintsVertically [21]
+                0.00    0.00      88/88          ReadNumber [24]
+[23]     0.0    0.00    0.00      88         IsInteger [23]
 -----------------------------------------------
-                0.00    0.00      10/562         Initialize [26]
-                0.01    0.00     552/562         CreateHashTable [24]
-[22]     0.1    0.01    0.00     562         VectorInitialize [22]
+                0.00    0.00       1/59          GetGridDimensions [34]
+                0.00    0.00      58/59          GetCoordinates [25]
+[24]     0.0    0.00    0.00      59         ReadNumber [24]
+                0.00    0.00      88/88          IsInteger [23]
 -----------------------------------------------
-                0.00    0.01       1/1           main [1]
-[23]     0.1    0.00    0.01       1         ProcessDictionary [23]
-                0.00    0.01       1/1           CreateHashTable [24]
-                0.00    0.00   24952/24952       AddToHashTable [27]
-                0.00    0.00       1/1           UpdateDataGrid [46]
+                0.00    0.00      29/29          GetBlackBoxes [33]
+[25]     0.0    0.00    0.00      29         GetCoordinates [25]
+                0.00    0.00      58/59          ReadNumber [24]
 -----------------------------------------------
-                0.00    0.01       1/1           ProcessDictionary [23]
-[24]     0.1    0.00    0.01       1         CreateHashTable [24]
-                0.01    0.00     552/562         VectorInitialize [22]
+                0.00    0.00      12/12          QuickSort [27]
+[26]     0.0    0.00    0.00      12         Swap [26]
 -----------------------------------------------
-                0.01    0.00  442787/442787      AddConstraints [11]
-[25]     0.1    0.01    0.00  442787         AddConstraintsVertically [25]
+                                  14             QuickSort [27]
+                0.00    0.00       2/2           Sort [44]
+[27]     0.0    0.00    0.00       2+14      QuickSort [27]
+                0.00    0.00      12/12          Swap [26]
+                                  14             QuickSort [27]
 -----------------------------------------------
-                0.00    0.00       1/1           Solve [2]
-[26]     0.0    0.00    0.00       1         Initialize [26]
-                0.00    0.00      10/562         VectorInitialize [22]
+                0.00    0.00       1/1           main [3]
+[28]     0.0    0.00    0.00       1         CreateGridVisualization [28]
+                0.00    0.00       1/1           GetGridDimensions [34]
+                0.00    0.00       1/1           GetBlackBoxes [33]
 -----------------------------------------------
-                0.00    0.00   24952/24952       ProcessDictionary [23]
-[27]     0.0    0.00    0.00   24952         AddToHashTable [27]
-                0.00    0.00   33161/50033290     VectorInsert [19]
+                0.00    0.00       1/1           ProcessDictionary [41]
+[29]     0.0    0.00    0.00       1         CreateHashTable [29]
+                0.00    0.00    1440/1440        VectorInitialize [22]
 -----------------------------------------------
-                0.00    0.00      19/19          ReadNumber [29]
-[28]     0.0    0.00    0.00      19         IsInteger [28]
+                0.00    0.00       1/1           Solve [1]
+[30]     0.0    0.00    0.00       1         FlagsInitialize [30]
 -----------------------------------------------
-                0.00    0.00       1/13          GetGridDimensions [37]
-                0.00    0.00      12/13          GetCoordinates [30]
-[29]     0.0    0.00    0.00      13         ReadNumber [29]
-                0.00    0.00      19/19          IsInteger [28]
+                0.00    0.00       1/1           ProcessGridData [42]
+[31]     0.0    0.00    0.00       1         GapLengthsVertically [31]
 -----------------------------------------------
-                0.00    0.00       6/6           GetBlackBoxes [36]
-[30]     0.0    0.00    0.00       6         GetCoordinates [30]
-                0.00    0.00      12/13          ReadNumber [29]
+                0.00    0.00       1/1           ProcessGridData [42]
+[32]     0.0    0.00    0.00       1         GapsLengthsHorizontally [32]
 -----------------------------------------------
-                0.00    0.00       4/4           QuickSort [32]
-[31]     0.0    0.00    0.00       4         Swap [31]
+                0.00    0.00       1/1           CreateGridVisualization [28]
+[33]     0.0    0.00    0.00       1         GetBlackBoxes [33]
+                0.00    0.00      29/29          GetCoordinates [25]
 -----------------------------------------------
-                                   4             QuickSort [32]
-                0.00    0.00       2/2           Sort [45]
-[32]     0.0    0.00    0.00       2+4       QuickSort [32]
-                0.00    0.00       4/4           Swap [31]
-                                   4             QuickSort [32]
+                0.00    0.00       1/1           CreateGridVisualization [28]
+[34]     0.0    0.00    0.00       1         GetGridDimensions [34]
+                0.00    0.00       1/59          ReadNumber [24]
 -----------------------------------------------
-                0.00    0.00       1/1           main [1]
-[33]     0.0    0.00    0.00       1         CreateGridVisualization [33]
-                0.00    0.00       1/1           GetGridDimensions [37]
-                0.00    0.00       1/1           GetBlackBoxes [36]
+                0.00    0.00       1/1           Solve [1]
+[35]     0.0    0.00    0.00       1         Initialize [35]
 -----------------------------------------------
-                0.00    0.00       1/1           ProcessGridData [43]
-[34]     0.0    0.00    0.00       1         GapLengthsVertically [34]
+                0.00    0.00       1/1           Solve [1]
+[36]     0.0    0.00    0.00       1         IntersectionsHorizontally [36]
 -----------------------------------------------
-                0.00    0.00       1/1           ProcessGridData [43]
-[35]     0.0    0.00    0.00       1         GapsLengthsHorizontally [35]
+                0.00    0.00       1/1           Solve [1]
+[37]     0.0    0.00    0.00       1         IntersectionsVertically [37]
 -----------------------------------------------
-                0.00    0.00       1/1           CreateGridVisualization [33]
-[36]     0.0    0.00    0.00       1         GetBlackBoxes [36]
-                0.00    0.00       6/6           GetCoordinates [30]
+                0.00    0.00       1/1           ProcessGridData [42]
+[38]     0.0    0.00    0.00       1         NumberWordsFitHorizontally [38]
 -----------------------------------------------
-                0.00    0.00       1/1           CreateGridVisualization [33]
-[37]     0.0    0.00    0.00       1         GetGridDimensions [37]
-                0.00    0.00       1/13          ReadNumber [29]
+                0.00    0.00       1/1           ProcessGridData [42]
+[39]     0.0    0.00    0.00       1         NumberWordsFitVertically [39]
 -----------------------------------------------
-                0.00    0.00       1/1           Solve [2]
-[38]     0.0    0.00    0.00       1         IntersectionsHorizontally [38]
+                0.00    0.00       1/1           main [3]
+[40]     0.0    0.00    0.00       1         PrintResult [40]
 -----------------------------------------------
-                0.00    0.00       1/1           Solve [2]
-[39]     0.0    0.00    0.00       1         IntersectionsVertically [39]
+                0.00    0.00       1/1           main [3]
+[41]     0.0    0.00    0.00       1         ProcessDictionary [41]
+                0.00    0.00   24952/24952       AddToHashTable [21]
+                0.00    0.00       1/1           CreateHashTable [29]
+                0.00    0.00       1/1           UpdateDataGrid [45]
 -----------------------------------------------
-                0.00    0.00       1/1           ProcessGridData [43]
-[40]     0.0    0.00    0.00       1         NumberWordsFitHorizontally [40]
+                0.00    0.00       1/1           main [3]
+[42]     0.0    0.00    0.00       1         ProcessGridData [42]
+                0.00    0.00       1/1           NumberWordsFitHorizontally [38]
+                0.00    0.00       1/1           NumberWordsFitVertically [39]
+                0.00    0.00       1/1           GapsLengthsHorizontally [32]
+                0.00    0.00       1/1           GapLengthsVertically [31]
 -----------------------------------------------
-                0.00    0.00       1/1           ProcessGridData [43]
-[41]     0.0    0.00    0.00       1         NumberWordsFitVertically [41]
+                0.00    0.00       1/1           Solve [1]
+[43]     0.0    0.00    0.00       1         SetGapsFillingOrder [43]
 -----------------------------------------------
-                0.00    0.00       1/1           main [1]
-[42]     0.0    0.00    0.00       1         PrintResult [42]
+                0.00    0.00       1/1           Solve [1]
+[44]     0.0    0.00    0.00       1         Sort [44]
+                0.00    0.00       2/2           QuickSort [27]
 -----------------------------------------------
-                0.00    0.00       1/1           main [1]
-[43]     0.0    0.00    0.00       1         ProcessGridData [43]
-                0.00    0.00       1/1           NumberWordsFitHorizontally [40]
-                0.00    0.00       1/1           NumberWordsFitVertically [41]
-                0.00    0.00       1/1           GapsLengthsHorizontally [35]
-                0.00    0.00       1/1           GapLengthsVertically [34]
+                0.00    0.00       1/1           ProcessDictionary [41]
+[45]     0.0    0.00    0.00       1         UpdateDataGrid [45]
 -----------------------------------------------
-                0.00    0.00       1/1           Solve [2]
-[44]     0.0    0.00    0.00       1         SetFlags [44]
------------------------------------------------
-                0.00    0.00       1/1           Solve [2]
-[45]     0.0    0.00    0.00       1         Sort [45]
-                0.00    0.00       2/2           QuickSort [32]
------------------------------------------------
-                0.00    0.00       1/1           ProcessDictionary [23]
-[46]     0.0    0.00    0.00       1         UpdateDataGrid [46]
------------------------------------------------
-                0.00    0.00       1/1           main [1]
-[47]     0.0    0.00    0.00       1         VisualizeResult [47]
+                0.00    0.00       1/1           main [3]
+[46]     0.0    0.00    0.00       1         VisualizeResult [46]
 -----------------------------------------------
 
  This table describes the call tree of the program, and was sorted by
@@ -385,19 +372,18 @@ notice and this notice are preserved.
 
 Index by function name
 
-  [11] AddConstraints         [37] GetGridDimensions       [8] RemoveConstraints
-  [12] AddConstraintsHorizontally [26] Initialize          [9] RemoveConstraintsHorizontally
-  [25] AddConstraintsVertically [38] IntersectionsHorizontally [21] RemoveConstraintsVertically
-  [27] AddToHashTable         [39] IntersectionsVertically [7] RemoveWord
-   [6] Backtracking           [16] IsHorizontalGap        [44] SetFlags
-   [5] ChooseWordToFillGap    [28] IsInteger               [2] Solve
-  [33] CreateGridVisualization [40] NumberWordsFitHorizontally [45] Sort
-  [24] CreateHashTable        [41] NumberWordsFitVertically [31] Swap
-   [3] FillGaps               [10] PlaceWord              [46] UpdateDataGrid
-  [20] GapHasConstraints      [42] PrintResult            [18] VectorEmpty
-  [34] GapLengthsVertically   [23] ProcessDictionary      [22] VectorInitialize
-  [35] GapsLengthsHorizontally [43] ProcessGridData       [19] VectorInsert
-  [36] GetBlackBoxes          [13] PutWordsOnVector       [17] VectorRemove
-  [30] GetCoordinates         [32] QuickSort              [47] VisualizeResult
-  [14] GetFaultyGap           [29] ReadNumber
-   [4] GetGapToFill           [15] RemoveAffectedWords
+  [10] AddConstraints         [34] GetGridDimensions      [13] RemoveAffectedWords
+  [16] AddConstraintsHorizontally [6] GetWord             [12] RemoveConstraints
+  [15] AddConstraintsVertically [35] Initialize           [17] RemoveConstraintsHorizontally
+  [21] AddToHashTable         [36] IntersectionsHorizontally [14] RemoveConstraintsVertically
+   [7] Backtracking           [37] IntersectionsVertically [9] RemoveWord
+   [5] ChooseWordToFillGap    [19] IsHorizontalGap        [43] SetGapsFillingOrder
+  [28] CreateGridVisualization [23] IsInteger             [11] SetWordsVector
+  [29] CreateHashTable        [38] NumberWordsFitHorizontally [1] Solve
+  [30] FlagsInitialize        [39] NumberWordsFitVertically [2] SolveCrossword
+  [31] GapLengthsVertically    [8] PlaceWord              [44] Sort
+  [32] GapsLengthsHorizontally [40] PrintResult           [26] Swap
+  [33] GetBlackBoxes          [41] ProcessDictionary      [45] UpdateDataGrid
+  [25] GetCoordinates         [42] ProcessGridData        [22] VectorInitialize
+  [18] GetFaultyGap           [27] QuickSort              [20] VectorInsert
+   [4] GetGapToFill           [24] ReadNumber             [46] VisualizeResult

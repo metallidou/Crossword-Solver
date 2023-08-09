@@ -25,12 +25,12 @@ Grid ProcessGridData(GridVisual VisualGrid)
     // Find the Number of Words that fit Horizontally to the grid
     grid->horizontally = malloc(sizeof(struct GridHORIZONTALLY)); 
     grid = NumberWordsFitHorizontally(grid, VisualGrid);
-    grid->horizontally->coordinates = malloc(grid->horizontally->words_count * sizeof(struct Grid_WORD_COORDINATES));
+    grid->horizontally->coordinates = malloc(grid->horizontally->words_count * sizeof(struct GridCOORDINATES));
 
     // Find the Number of Words that fit Vertically to the grid
     grid->vertically = malloc(sizeof(struct GridVERTICALLY)); 
     grid = NumberWordsFitVertically(grid, VisualGrid);
-    grid->vertically->coordinates = malloc(grid->vertically->words_count * sizeof(struct Grid_WORD_COORDINATES));
+    grid->vertically->coordinates = malloc(grid->vertically->words_count * sizeof(struct GridCOORDINATES));
 
     // Find the Lengths of the Words that can fit Horizontally
     grid = GapsLengthsHorizontally(grid, VisualGrid);
