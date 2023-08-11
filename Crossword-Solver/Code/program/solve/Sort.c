@@ -15,7 +15,7 @@ Coordinates QuickSort(Coordinates Coordinates, int Up, int Down)
 
 	while (Up < Down)
 	{
-		while (Coordinates[Up].word_possibilities <= Coordinates[Down].word_possibilities && Up < Down)
+		while (Coordinates[Up].length >= Coordinates[Down].length && Up < Down)
 			Down--;
 	
 		if (Up != Down)
@@ -24,7 +24,7 @@ Coordinates QuickSort(Coordinates Coordinates, int Up, int Down)
 			Up++;
 		}
 
-		while (Coordinates[Up].word_possibilities <= Coordinates[Down].word_possibilities && Up < Down)
+		while (Coordinates[Up].length >= Coordinates[Down].length && Up < Down)
 			Up++;
 
 		if (Up != Down)
