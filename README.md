@@ -1,2 +1,4 @@
 # Crossword-Solver
-2nd working version of program
+3d working version of program
+solves Crossword1, Crossword2
+significantly improved performance in others
