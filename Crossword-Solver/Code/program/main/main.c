@@ -22,54 +22,12 @@ int main(int argc, char** argv)
 
     PrintResult(VisualizeResult(data_grid, visual_grid), visual_grid->x, visual_grid->y);
        
-/*
-    printf("words horizontally %d\n", data_grid->horizontally->words_count);
-    printf("words vertically %d\n", data_grid->vertically->words_count);
-
-    printf("horizontally\n");
-    for(int i = 0; i < data_grid->horizontally->words_count; i++)
-        printf("length %d start_row %d end_row %d start_col %d end_col %d possibilities %d\n", data_grid->horizontally->coordinates[i].length, data_grid->horizontally->coordinates[i].start_row, data_grid->horizontally->coordinates[i].end_row, data_grid->horizontally->coordinates[i].start_col, data_grid->horizontally->coordinates[i].end_col, data_grid->horizontally->coordinates[i].word_possibilities);
-    printf("vertically\n");
-    for(int i = 0; i < data_grid->vertically->words_count; i++)
-        printf("length %d start_row %d end_row %d start_col %d end_col %d possibilities %d\n", data_grid->vertically->coordinates[i].length, data_grid->vertically->coordinates[i].start_row, data_grid->vertically->coordinates[i].end_row, data_grid->vertically->coordinates[i].start_col, data_grid->vertically->coordinates[i].end_col, data_grid->vertically->coordinates[i].word_possibilities);
-
-    for(int i = 0; i <= data_grid->word_lengths->max_length; i++)
-    {
-        if(data_grid->word_lengths->length_exists[i] == true)
-            printf("length %d exists and words number is %d\n", i, dictionary->length[i]->words_num);
-    }
-    printf("\n");
-
-    printf("  ");
-    for(int i = 0; i < visual_grid->x; i++)
-        printf(" %d ", i);
-    printf("\n");    
-
-    int c = 0;
-
-    for(int i = 0; i < visual_grid->x; i++)
-    {
-        for(int j = 0; j < visual_grid->y; j++)
-        {
-            if(j == 0)
-            {
-                printf(" %d\t", c);
-                c++;
-            }
-            if(visual_grid->IsBlackBox[i][j])
-                printf("###");
-            else
-                printf(" - ");    
-        }
-        printf("\n");
-    }
-*/
     return 0;
 }
 
 char** VisualizeResult(Grid DataGrid, GridVisual VisualGrid)
 {
-    int temp, row;
+    int temp, row, col;
     char** result;
 
     // memory allocation for result table
@@ -101,6 +59,19 @@ char** VisualizeResult(Grid DataGrid, GridVisual VisualGrid)
                 result[row][temp+j] = '+';
         }
     }
+
+    for(int i = 0; i < DataGrid->vertically->words_count; i++)
+    {
+        col = DataGrid->vertically->coordinates[i].start_col;
+        temp = DataGrid->vertically->coordinates[i].start_row;
+        
+        for(int j = 0; j < DataGrid->vertically->coordinates[i].length; j++)
+        {
+            if(DataGrid->vertically->coordinates[i].solution->filled == true) 
+                result[temp+j][col] = DataGrid->vertically->coordinates[i].solution->word[j];
+        }
+    }
+    
 
     for(int i = 0; i < DataGrid->horizontally->words_count; i++)
     {

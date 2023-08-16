@@ -6,26 +6,18 @@
 #include "../../include/solve/Solve.h"
 
 int FLAG;
-int COUNT1;
-int COUNT2;
-int COUNT3;
 
 Grid Solve(Grid DataGrid, HashTable Dictionary)
 {
     Flags* flags;
     FLAG = 0;
-    COUNT1 = 0;
-    COUNT2 = 0;
-    COUNT3 = 0;
 
-    DataGrid = Sort(DataGrid);
     Initialize(DataGrid, Dictionary);
     flags = FlagsInitialize(DataGrid, flags);
 
     DataGrid = IntersectionsHorizontally(DataGrid);
     DataGrid = IntersectionsVertically(DataGrid);
 
-    DataGrid = SetGapsFillingOrder(DataGrid, flags);
     DataGrid = SolveCrossword(DataGrid, Dictionary, flags);
 
     return DataGrid;
@@ -100,8 +92,11 @@ Flags* FlagsInitialize(Grid DataGrid, Flags* Flags)
 {
     Flags = malloc((DataGrid->horizontally->words_count + DataGrid->vertically->words_count) * sizeof(Flags));
     for (int i = 0; i < (DataGrid->horizontally->words_count + DataGrid->vertically->words_count); i++)
+    {
         Flags[i] = malloc(sizeof(struct CrosswordFLAGS));
-
+        Flags[i]->horizontal_gap = false;
+        Flags[i]->index = -1;
+    }
     return Flags;    
 }
 
@@ -159,60 +154,88 @@ Grid IntersectionsVertically(Grid DataGrid)
     return DataGrid;
 }
 
-Grid SetGapsFillingOrder(Grid DataGrid, Flags* Flags)
+Grid SolveCrossword(Grid DataGrid, HashTable Dictionary, Flags* Flags)
 {
-    int words_horizontally, words_vertically, max, count, flag;
-    count = 0; 
-    flag = 0;
-
-    words_horizontally = DataGrid->horizontally->words_count;
-    words_vertically = DataGrid->vertically->words_count;
-    max = MAX(words_horizontally, words_vertically);
-        
-    for(int i = 0; i < max; i++)
+    int max_flag = DataGrid->horizontally->words_count + DataGrid->vertically->words_count - 1;
+    
+    //while (FLAG != max_flag+1)
+    for(int i = 0; i < 10000000; i++)
     {
-        if((count < words_horizontally) && (count < words_vertically))
-        {
-            Flags[flag]->horizontal_gap = true;
-            Flags[flag]->index = i;
-            DataGrid->horizontally->coordinates[i].flag = flag++;
+        if(FLAG == max_flag+1)
+            break;
+        if (Flags[FLAG]->index == -1)
+            DataGrid = SetGapsFillingOrder(DataGrid, Dictionary, Flags, FLAG);
 
-            Flags[flag]->horizontal_gap = false;
-            Flags[flag]->index = i;
-            DataGrid->vertically->coordinates[i].flag = flag++;
-            count++;
-        }
-        else
-        {
-            if(words_horizontally > words_vertically)
-            {
-                Flags[flag]->horizontal_gap = true;
-                Flags[flag]->index = i;
-                DataGrid->horizontally->coordinates[i].flag = flag++;
-            }         
-            else
-            {
-                Flags[flag]->horizontal_gap = false;
-                Flags[flag]->index = i;
-                DataGrid->vertically->coordinates[i].flag = flag++;
-            }
-        }
+        DataGrid = GetGapToFill(DataGrid, Dictionary, Flags, FLAG);
     }
     return DataGrid;
 }
 
-Grid SolveCrossword(Grid DataGrid, HashTable Dictionary, Flags* Flags)
+Grid SetGapsFillingOrder(Grid DataGrid, HashTable Dictionary, Flags* Flags, int CurrentFlag)
 {
-    int max_flag = DataGrid->horizontally->words_count + DataGrid->vertically->words_count - 1;
-
-    //while (FLAG != max_flag+1)
-    for(int i = 0; i < 60000000; i++)
+    if (CurrentFlag == 0)
     {
-        if(FLAG == max_flag+1)
-            break;
-        DataGrid = GetGapToFill(DataGrid, Dictionary, Flags, FLAG);
+        int length, max1, max2;
+        max1 = max2 = INT_MIN;
+
+        for (int i = 0; i < DataGrid->horizontally->words_count; i++)
+        {
+            length = DataGrid->horizontally->coordinates[i].length;
+            if (length > max1)
+            {
+                max1 = length;
+                Flags[CurrentFlag]->horizontal_gap = true;
+                Flags[CurrentFlag]->index = i;
+            }
+        }
+        for (int i = 0; i < DataGrid->vertically->words_count; i++)
+        {
+            length = DataGrid->vertically->coordinates[i].length;
+            if (length > max2)
+            {
+                max2 = length;  
+                Flags[CurrentFlag]->horizontal_gap = false;
+                Flags[CurrentFlag]->index = i;
+            }
+        }
     }
-    printf("COUNT1 %d COUNT2 %d COUNT3 %d\n", COUNT1, COUNT2, COUNT3);
+    else
+    {
+        int num, min_num = INT_MAX;
+
+        for (int i = 0; i < DataGrid->horizontally->words_count; i++)
+        {
+            if (DataGrid->horizontally->coordinates[i].solution->filled == true)
+                continue;
+            num = GetWordsNumber(DataGrid->horizontally->coordinates[i], Dictionary);
+
+            if (num < min_num)
+            {
+                min_num = num;
+                Flags[CurrentFlag]->horizontal_gap = true;
+                Flags[CurrentFlag]->index = i;
+            }
+        }
+        for (int i = 0; i < DataGrid->vertically->words_count; i++)
+        {
+            if (DataGrid->vertically->coordinates[i].solution->filled == true)
+                continue;
+            num = GetWordsNumber(DataGrid->vertically->coordinates[i], Dictionary);
+
+            if (num < min_num)
+            {
+                min_num = num;
+                Flags[CurrentFlag]->horizontal_gap = false;
+                Flags[CurrentFlag]->index = i;
+            }
+        }
+    }
+
+    if (Flags[CurrentFlag]->horizontal_gap == true)
+        DataGrid->horizontally->coordinates[Flags[CurrentFlag]->index].flag = CurrentFlag;
+    else
+        DataGrid->vertically->coordinates[Flags[CurrentFlag]->index].flag = CurrentFlag;
+        
     return DataGrid;
 }
 
@@ -223,28 +246,24 @@ Grid GetGapToFill(Grid DataGrid, HashTable Dictionary, Flags* Flags, int Current
     if (Flags[CurrentFlag]->horizontal_gap == true)
     {
         index = Flags[CurrentFlag]->index;
-        DataGrid = ChooseWordToFillGap(DataGrid, DataGrid->horizontally->coordinates[index], Dictionary, Flags, CurrentFlag);
+        if (DataGrid->horizontally->coordinates[index].solution->filled == false)
+            DataGrid = ChooseWordToFillGap(DataGrid, DataGrid->horizontally->coordinates[index], Dictionary, Flags, CurrentFlag);
     }
     else 
     {
         index = Flags[CurrentFlag]->index;
-        DataGrid = ChooseWordToFillGap(DataGrid, DataGrid->vertically->coordinates[index], Dictionary, Flags, CurrentFlag);
+        if (DataGrid->vertically->coordinates[index].solution->filled == false)
+            DataGrid = ChooseWordToFillGap(DataGrid, DataGrid->vertically->coordinates[index], Dictionary, Flags, CurrentFlag);
     }
     return DataGrid;
 }
 
 Grid ChooseWordToFillGap(Grid DataGrid, struct GridCOORDINATES Gap, HashTable Dictionary, Flags* Flags, int CurrentFlag)
 {
-    char* word = malloc(100 * sizeof(char));
-    Vector words_vector;
-    int index;
-    
-    word = GetWord(Gap, Dictionary);
+    char* word = GetWord(Gap, Dictionary);
 
     if (word == NULL)
-    {
         DataGrid = Backtracking(DataGrid, Gap, Flags, CurrentFlag);
-    }
     else
     {
         DataGrid = PlaceWord(DataGrid, Gap, word);
@@ -252,7 +271,8 @@ Grid ChooseWordToFillGap(Grid DataGrid, struct GridCOORDINATES Gap, HashTable Di
         if (IsValid(DataGrid, Gap, Dictionary) == false)
         {
             RemoveWord(DataGrid, Gap);
-            FLAG--;
+            if (FLAG > 0)
+                FLAG--;
         }
     }
     return DataGrid;
@@ -260,7 +280,7 @@ Grid ChooseWordToFillGap(Grid DataGrid, struct GridCOORDINATES Gap, HashTable Di
 
 bool IsValid(Grid DataGrid, struct GridCOORDINATES Gap, HashTable Dictionary)
 {
-    int index, hold;
+    int index, temp;
 
     for (int i = 0; i < Gap.intersections->num; i++)
     {
@@ -268,34 +288,32 @@ bool IsValid(Grid DataGrid, struct GridCOORDINATES Gap, HashTable Dictionary)
 
         if (IsHorizontalGap(Gap))
         {
-            hold = DataGrid->vertically->coordinates[index].solution->constraints->used_index;
-            //hold = -1;
+            temp = DataGrid->vertically->coordinates[index].solution->constraints->used_index;
 
             if (DataGrid->vertically->coordinates[index].solution->filled == false)
             {
                 if (GetWord(DataGrid->vertically->coordinates[index], Dictionary) == NULL)
                 {
-                    DataGrid->vertically->coordinates[index].solution->constraints->used_index = hold;
+                    DataGrid->vertically->coordinates[index].solution->constraints->used_index = temp;
                     return false;
                 }
                 else
-                    DataGrid->vertically->coordinates[index].solution->constraints->used_index = hold;
+                    DataGrid->vertically->coordinates[index].solution->constraints->used_index = temp;
             }
         }
         else
         {
-            hold = DataGrid->horizontally->coordinates[index].solution->constraints->used_index;
-            //hold = -1;
+            temp = DataGrid->horizontally->coordinates[index].solution->constraints->used_index;
 
             if (DataGrid->horizontally->coordinates[index].solution->filled == false)
             {
                 if (GetWord(DataGrid->horizontally->coordinates[index], Dictionary) == NULL)
                 {
-                    DataGrid->horizontally->coordinates[index].solution->constraints->used_index = hold;
+                    DataGrid->horizontally->coordinates[index].solution->constraints->used_index = temp;
                     return false;
                 }   
                 else
-                    DataGrid->horizontally->coordinates[index].solution->constraints->used_index = hold;
+                    DataGrid->horizontally->coordinates[index].solution->constraints->used_index = temp;
             }
         }   
     }
@@ -305,14 +323,14 @@ bool IsValid(Grid DataGrid, struct GridCOORDINATES Gap, HashTable Dictionary)
 Vector SetWordsVector(struct GridCOORDINATES Gap, HashTable Dictionary)
 {
     int index, possibiities = INT_MAX;
-    char letter, ch;
     bool has_constraints = false;
+    char letter, ch;
 
     for (int i = 0; i < Gap.length; i++)
     {
         ch = Gap.solution->constraints->letters[i];
         
-        if (ch == ' ')
+        if (ch == ' ')  
             continue;
         
         if (Dictionary->length[Gap.length]->position[i]->letter[(int)(ch)-97]->words->size < possibiities)
@@ -322,7 +340,6 @@ Vector SetWordsVector(struct GridCOORDINATES Gap, HashTable Dictionary)
             letter = ch;
             has_constraints = true;
         }
-        COUNT3++;
     }
 
     if (has_constraints == false)
@@ -331,9 +348,32 @@ Vector SetWordsVector(struct GridCOORDINATES Gap, HashTable Dictionary)
         return Dictionary->length[Gap.length]->position[index]->letter[(int)(letter)-97]->words;
 }
 
+int GetWordsNumber(struct GridCOORDINATES Gap, HashTable Dictionary)
+{
+    Vector words_vector = SetWordsVector(Gap, Dictionary);
+    int count = 0;
+    bool suitable;
+
+    for (int i = 0; i < words_vector->size; i++)
+    {
+        suitable = true;
+
+        for (int j = 0; j < Gap.length; j++)
+        {
+            if (Gap.solution->constraints->letters[j] == ' ')
+                continue;
+            if (Gap.solution->constraints->letters[j] != words_vector->word[i][j])
+                suitable = false;
+        }
+        if (suitable == true)   
+            count++;
+    }
+    return count;
+}
+
 String GetWord(struct GridCOORDINATES Gap, HashTable Dictionary)
 {
-    Vector words_vector = malloc(sizeof(struct VECTOR));
+    Vector words_vector;
     bool suitable;
 
     if (Gap.solution->constraints->used_index == -1)
@@ -342,23 +382,16 @@ String GetWord(struct GridCOORDINATES Gap, HashTable Dictionary)
         Gap.solution->constraints->words = words_vector;
     }
     else
-    {
         words_vector = Gap.solution->constraints->words;
-    }
-
-    //printf("vector size %d length %d constraints %s\n", words_vector->size, Gap.length, Gap.solution->constraints->letters);
 
     for (int i = Gap.solution->constraints->used_index+1; i < words_vector->size; i++)
     {
         suitable = true;
-        COUNT1++;
 
         for (int j = 0; j < Gap.length; j++)
         {
-            COUNT2++;
             if (Gap.solution->constraints->letters[j] == ' ')
                 continue;
-            
             if (Gap.solution->constraints->letters[j] != words_vector->word[i][j])
                 suitable = false;
         }
@@ -392,9 +425,7 @@ Grid Backtracking(Grid DataGrid, struct GridCOORDINATES Gap, Flags* Flags, int C
     struct GridCOORDINATES faulty;
 
     faulty = GetFaultyGap(DataGrid, Gap, Flags, CurrentFlag);
-    
     DataGrid = RemoveWord(DataGrid, faulty);
-    DataGrid = RemoveAffectedWords(DataGrid, Gap);
     FLAG = faulty.flag;
 
     return DataGrid;
@@ -402,23 +433,10 @@ Grid Backtracking(Grid DataGrid, struct GridCOORDINATES Gap, Flags* Flags, int C
 
 struct GridCOORDINATES GetFaultyGap(Grid DataGrid, struct GridCOORDINATES Gap, Flags* Flags, int CurrentFlag)
 {
-    struct GridCOORDINATES faulty;
-    int index;
-
-    for(int i = CurrentFlag-1; i >= 0; i--)
-    {
-        if ((Flags[i]->horizontal_gap == true) && (!IsHorizontalGap(Gap)))
-        {
-            index = Flags[i]->index;
-            return DataGrid->horizontally->coordinates[index];
-        }
-            
-        if (Flags[i]->horizontal_gap == false && (IsHorizontalGap(Gap)))
-        {
-            index = Flags[i]->index;
-            return DataGrid->vertically->coordinates[index];
-        }
-    }
+    if (Flags[CurrentFlag-1]->horizontal_gap == true)
+        return DataGrid->horizontally->coordinates[Flags[CurrentFlag-1]->index];
+    else    
+        return DataGrid->vertically->coordinates[Flags[CurrentFlag-1]->index];
 }
 
 Grid AddConstraints(Grid DataGrid, struct GridCOORDINATES Gap)
@@ -427,7 +445,6 @@ Grid AddConstraints(Grid DataGrid, struct GridCOORDINATES Gap)
         DataGrid = AddConstraintsVertically(DataGrid, Gap);
     else
         DataGrid = AddConstraintsHorizontally(DataGrid, Gap); 
-    
     return DataGrid;    
 }
 
@@ -437,7 +454,6 @@ Grid RemoveConstraints(Grid DataGrid, struct GridCOORDINATES Gap)
         DataGrid = RemoveConstraintsVertically(DataGrid, Gap);
     else
         DataGrid = RemoveConstraintsHorizontally(DataGrid, Gap);
-
     return DataGrid;  
 }
 
@@ -480,7 +496,6 @@ Grid AddConstraintsVertically(Grid DataGrid, struct GridCOORDINATES Gap)
 Grid RemoveConstraintsHorizontally(Grid DataGrid, struct GridCOORDINATES Gap)
 {
     int gap_index, col_index, start;
-
     col_index = Gap.start_col;
 
     for (int i = 0; i < Gap.intersections->num; i++)
@@ -495,7 +510,6 @@ Grid RemoveConstraintsHorizontally(Grid DataGrid, struct GridCOORDINATES Gap)
 Grid RemoveConstraintsVertically(Grid DataGrid, struct GridCOORDINATES Gap)
 {
     int gap_index, row_index, temp, start;
-
     row_index = Gap.start_row;
 
     for (int i = 0; i < Gap.intersections->num; i++)
@@ -503,33 +517,6 @@ Grid RemoveConstraintsVertically(Grid DataGrid, struct GridCOORDINATES Gap)
         gap_index = Gap.intersections->gap_index[i];
         start = DataGrid->vertically->coordinates[gap_index].start_row;
         DataGrid->vertically->coordinates[gap_index].solution->constraints->letters[row_index-start] = ' ';  
-    }
-    return DataGrid;
-}
-
-Grid RemoveAffectedWords(Grid DataGrid, struct GridCOORDINATES Gap)
-{
-    int index;
-
-    if(IsHorizontalGap(Gap))
-    {
-        for (int i = 0; i < Gap.intersections->num; i++)
-        {
-            index = Gap.intersections->gap_index[i];
-
-            if (DataGrid->vertically->coordinates[index].flag > Gap.flag && DataGrid->vertically->coordinates[index].solution->filled == true)
-                DataGrid = RemoveWord(DataGrid, DataGrid->vertically->coordinates[index]);
-        }
-    }
-    else
-    {
-        for (int i = 0; i < Gap.intersections->num; i++)
-        {
-            index = Gap.intersections->gap_index[i];
-
-            if(DataGrid->horizontally->coordinates[index].flag > Gap.flag && DataGrid->horizontally->coordinates[index].solution->filled == true)
-                DataGrid = RemoveWord(DataGrid, DataGrid->horizontally->coordinates[index]);
-        }
     }
     return DataGrid;
 }

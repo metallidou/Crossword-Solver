@@ -49,7 +49,6 @@ int GetGridDimensions(char* GridFile)
     start = 0;
     end = strlen(line);
     dimensions = ReadNumber(line, &start, end);
-
     fclose(file);
 
     return dimensions;
@@ -94,7 +93,7 @@ int ReadNumber(char* Text, int *StartIndex, int EndIndex)
 
     for(int i = *StartIndex; i <= EndIndex; i++)
     {
-        if(isspace(Text[i]) && get_int == true)      
+        if((isspace(Text[i]) && get_int == true))      
         {
             *StartIndex = i;
             return integer;
@@ -105,6 +104,7 @@ int ReadNumber(char* Text, int *StartIndex, int EndIndex)
             get_int = true;
         }
     }
+    return integer;
 }
 
 bool IsInteger(char ch)

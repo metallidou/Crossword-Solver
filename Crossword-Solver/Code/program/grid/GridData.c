@@ -42,14 +42,14 @@ Grid ProcessGridData(GridVisual VisualGrid)
     for (int i = 0; i < grid->horizontally->words_count; i++)
     {
         grid->horizontally->coordinates[i].word_possibilities = 0;
-        grid->horizontally->coordinates[i].flag = INT_MAX;
+        grid->horizontally->coordinates[i].flag = INT_MIN;
     }
 
     // Initialize possible Number of Words that can fit Vertically in each gap    
     for (int i = 0; i < grid->vertically->words_count; i++)
     {
         grid->vertically->coordinates[i].word_possibilities = 0;
-        grid->vertically->coordinates[i].flag = INT_MAX;
+        grid->vertically->coordinates[i].flag = INT_MIN;
     }
     return grid;
 }

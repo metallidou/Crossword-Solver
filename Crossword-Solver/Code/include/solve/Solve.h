@@ -13,7 +13,7 @@ Grid IntersectionsHorizontally(Grid DataGrid);
 Grid IntersectionsVertically(Grid DataGrid);
 
 Grid SetFlags(Grid DataGrid, Flags* Flags);
-Grid SetGapsFillingOrder(Grid DataGrid, Flags* Flag);
+Grid SetGapsFillingOrder(Grid DataGrid, HashTable Dictionary, Flags* Flags, int CurrentFlag);
 
 Grid SolveCrossword(Grid DataGrid, HashTable Dictionary, Flags* Flags);
 Grid GetGapToFill(Grid DataGrid, HashTable Dictionary, Flags* Flags, int CurrentFlag);
@@ -21,6 +21,7 @@ Grid ChooseWordToFillGap(Grid DataGrid, struct GridCOORDINATES Gap, HashTable Di
 
 Vector SetWordsVector(struct GridCOORDINATES Gap, HashTable Dictionary);
 String GetWord(struct GridCOORDINATES Gap, HashTable Dictionary);
+int GetWordsNumber(struct GridCOORDINATES Gap, HashTable Dictionary);
 
 Grid PlaceWord(Grid DataGrid, struct GridCOORDINATES Gap, char* Word);
 bool IsValid(Grid DataGrid, struct GridCOORDINATES Gap, HashTable Dictionary);
@@ -38,7 +39,6 @@ Grid RemoveConstraintsVertically(Grid DataGrid, struct GridCOORDINATES Gap);
 // BACKTRACKING
 struct GridCOORDINATES GetFaultyGap(Grid DataGrid, struct GridCOORDINATES Gap, Flags* Flags, int CurrentFlag);
 Grid RemoveWord(Grid DataGrid, struct GridCOORDINATES Gap);
-Grid RemoveAffectedWords(Grid DataGrid, struct GridCOORDINATES Gap);
 Grid Backtracking(Grid DataGrid, struct GridCOORDINATES Gap, Flags* Flags, int CurrentFlag);
 int IsHorizontalGap(struct GridCOORDINATES Gap);
 
