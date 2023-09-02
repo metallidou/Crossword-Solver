@@ -1,46 +1,44 @@
 #ifndef SOLVE_H
 #define SOLVE_H
 
-#include "../grid/GridData.h"
+#include "../grid/DataGridSTRUCT.h"
 #include "../hash_table/HashTable.h"
-#include "Sort.h"
+#include "FlagSTRUCT.h"
 
-Grid Solve(Grid DataGrid, HashTable Dictionary);
-Flags* FlagsInitialize(Grid DataGrid, Flags* Flags);
-void Initialize(Grid DataGrid, HashTable Dictionary);
+void Solve(DataGrid* DataGrid, HashTable Dictionary);
+void Initialize(DataGrid* DataGrid, Flag* Flags, HashTable Dictionary);
 
-Grid IntersectionsHorizontally(Grid DataGrid);
-Grid IntersectionsVertically(Grid DataGrid);
+void IntersectionsHorizontally(DataGrid* DataGrid);
+void IntersectionsVertically(DataGrid* DataGrid);
 
-Grid SetFlags(Grid DataGrid, Flags* Flags);
-Grid SetGapsFillingOrder(Grid DataGrid, HashTable Dictionary, Flags* Flags, int CurrentFlag);
+void SetGapsFillingOrder(DataGrid* DataGrid, HashTable Dictionary, Flag* Flags, int CurrentFlag);
 
-Grid SolveCrossword(Grid DataGrid, HashTable Dictionary, Flags* Flags);
-Grid GetGapToFill(Grid DataGrid, HashTable Dictionary, Flags* Flags, int CurrentFlag);
-Grid ChooseWordToFillGap(Grid DataGrid, struct GridCOORDINATES Gap, HashTable Dictionary, Flags* Flags, int CurrentFlag);
+void SolveCrossword(DataGrid* DataGrid, HashTable Dictionary, Flag* Flags);
+void GetGapToFill(DataGrid* DataGrid, HashTable Dictionary, Flag* Flags, int CurrentFlag);
+void ChooseWordToFillGap(DataGrid* DataGrid, Coordinates* Gap, HashTable Dictionary, Flag* Flags, int CurrentFlag);
 
-Vector SetWordsVector(struct GridCOORDINATES Gap, HashTable Dictionary);
-String GetWord(struct GridCOORDINATES Gap, HashTable Dictionary);
-int GetWordsNumber(struct GridCOORDINATES Gap, HashTable Dictionary);
+Vector SetWordsVector(Coordinates Gap, HashTable Dictionary);
+String GetWord(Coordinates* Gap, HashTable Dictionary);
+int GetWordsNumber(Coordinates Gap, HashTable Dictionary);
 
-Grid PlaceWord(Grid DataGrid, struct GridCOORDINATES Gap, char* Word);
-bool IsValid(Grid DataGrid, struct GridCOORDINATES Gap, HashTable Dictionary);
+void PlaceWord(DataGrid* DataGrid, Coordinates* Gap, String Word);
+bool IsValid(DataGrid DataGrid, Coordinates Gap, HashTable Dictionary);
 
 // CONSTRAINTS
-Grid AddConstraints(Grid DataGrid, struct GridCOORDINATES Gap);
-Grid RemoveConstraints(Grid DataGrid, struct GridCOORDINATES Gap);
+void AddConstraints(DataGrid* DataGrid, Coordinates Gap);
+void RemoveConstraints(DataGrid* DataGrid, Coordinates Gap);
 
-Grid AddConstraintsHorizontally(Grid DataGrid, struct GridCOORDINATES Gap);
-Grid AddConstraintsVertically(Grid DataGrid, struct GridCOORDINATES Gap);
+void AddConstraintsHorizontally(DataGrid* DataGrid, Coordinates Gap);
+void AddConstraintsVertically(DataGrid* DataGrid, Coordinates Gap);
 
-Grid RemoveConstraintsHorizontally(Grid DataGrid, struct GridCOORDINATES Gap);
-Grid RemoveConstraintsVertically(Grid DataGrid, struct GridCOORDINATES Gap);
+void RemoveConstraintsHorizontally(DataGrid* DataGrid, Coordinates Gap);
+void RemoveConstraintsVertically(DataGrid* DataGrid, Coordinates Gap);
 
 // BACKTRACKING
-struct GridCOORDINATES GetFaultyGap(Grid DataGrid, struct GridCOORDINATES Gap, Flags* Flags, int CurrentFlag);
-Grid RemoveWord(Grid DataGrid, struct GridCOORDINATES Gap);
-Grid Backtracking(Grid DataGrid, struct GridCOORDINATES Gap, Flags* Flags, int CurrentFlag);
-int IsHorizontalGap(struct GridCOORDINATES Gap);
+Coordinates GetFaultyGap(DataGrid DataGrid, Flag* Flags, int CurrentFlag);
+void RemoveWord(DataGrid* DataGrid, Coordinates* Gap);
+void Backtracking(DataGrid* DataGrid, Coordinates Gap, Flag* Flags, int CurrentFlag);
+int IsHorizontalGap(Coordinates Gap);
 
 #endif
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------

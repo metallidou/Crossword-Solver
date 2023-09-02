@@ -1,14 +1,14 @@
-#ifndef VECTOR_STRUCT_H
-#define VECTOR_STRUCT_H
+#ifndef FLAG_STRUCT_H
+#define FLAG_STRUCT_H
 
-typedef struct VECTOR Vector;
-typedef char* String;
+#include <stdbool.h>
 
-struct VECTOR
+typedef struct FlagSTRUCT Flag; 
+
+struct FlagSTRUCT
 {
-    String* word;
-    int capacity;
-    int size;
+    bool horizontal_gap;
+    int index;
 };
 
 #endif

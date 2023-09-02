@@ -1,14 +1,14 @@
 #ifndef HASH_TABLE_STRUCT_H
 #define HASH_TABLE_STRUCT_H
 
-#include "../grid/GridSTRUCT.h"
+#include "../grid/DataGridSTRUCT.h"
 #include "../vector/VectorSTRUCT.h"
 
 // hash table
-typedef struct HashTableSTRUCT* HashTable;
-typedef struct HashTableLENGTH* HashTableLength; 
-typedef struct HashTablePOSITION* HashTablePosition;
-typedef struct HashTableLETTER* HashTableLetter;
+typedef struct HashTableSTRUCT HashTable;
+typedef struct HashTableLENGTH HashTableLength; 
+typedef struct HashTablePOSITION HashTablePosition;
+typedef struct HashTableLETTER HashTableLetter;
 
 //-------------------------------------- HASH TABLE ----------------------------------------------------------------------------------
 

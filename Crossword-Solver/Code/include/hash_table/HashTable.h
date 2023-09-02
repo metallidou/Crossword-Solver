@@ -4,8 +4,8 @@
 #include "HashTableSTRUCT.h"
 #include "../vector/Vector.h"
 
-HashTable CreateHashTable(Grid DataGrid);
-void AddToHashTable(HashTable HashTable, char* Word);
+HashTable CreateHashTable(DataGrid DataGrid);
+void AddToHashTable(HashTable* HashTable, char* Word);
 
 #endif
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------

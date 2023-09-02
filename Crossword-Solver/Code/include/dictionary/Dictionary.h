@@ -1,11 +1,11 @@
 #ifndef DICTIONARY_H
 #define DICTIONARY_H
 
-#include "../grid/GridSTRUCT.h"
+#include "../grid/DataGridSTRUCT.h"
 #include "../hash_table/HashTable.h"
 
-HashTable ProcessDictionary(Grid DataGrid, char* DictionaryFile);
-void UpdateDataGrid(Grid DataGrid, HashTable HashTable);
+HashTable ProcessDictionary(DataGrid DataGrid, char* DictionaryFile);
+bool IsWithinBounds(DataGrid DataGrid, String Word);
 
 #endif
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------

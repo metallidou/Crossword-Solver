@@ -3,15 +3,17 @@
 #include <string.h>
 #include "../../include/vector/Vector.h"
 
-Vector VectorInitialize(Vector Vector)
+Vector VectorInitialize()
 {
-    Vector->capacity = MAX_SIZE;
-    Vector->size = 0;
-    Vector->word = malloc(Vector->capacity * sizeof(String));
-    return Vector;
+    Vector vector;
+
+    vector.capacity = MAX_SIZE;
+    vector.size = 0;
+    vector.word = malloc(vector.capacity * sizeof(String));
+    return vector;
 }
 
-Vector VectorInsert(Vector Vector, String Word)
+void VectorInsert(Vector* Vector, String Word)
 {
     int size, capacity;
     size = Vector->size; 
@@ -23,21 +25,19 @@ Vector VectorInsert(Vector Vector, String Word)
         strcpy(Vector->word[size], Word);
         Vector->size++;
     }
-    return Vector;
 }
 
-Vector VectorRemove(Vector Vector, String Word)
+void VectorRemove(Vector* Vector, String Word)
 {
-    if(!VectorEmpty(Vector))
+    if(!VectorEmpty(*Vector))
     {
         strcpy(Word, Vector->word[Vector->size-1]);
         free(Vector->word[Vector->size-1]);
         Vector->size--;
     }
-    return Vector;
 }
 
 int VectorEmpty(Vector Vector)
 {
-    return (Vector->size == 0);
+    return (Vector.size == 0);
 }

@@ -3,37 +3,36 @@
 #include <string.h>
 #include "../../include/dictionary/Dictionary.h"
 
-HashTable ProcessDictionary(Grid DataGrid, char* DictionaryFile)
+HashTable ProcessDictionary(DataGrid DataGrid, char* DictionaryFile)
 {
     FILE *file = fopen(DictionaryFile, "r");
+
     HashTable hash_table = CreateHashTable(DataGrid);
-    char word[100];
+    char* word = malloc(100 * sizeof(char));
 
     while(fgets(word, 100, file))
     {
-        word[strlen(word)-1] = 0;    // to remove '\n'
-        AddToHashTable(hash_table, word);
-    }
-    UpdateDataGrid(DataGrid, hash_table);
+        word[strlen(word)-1] = 0;               // to remove '\n'
 
+        if (IsWithinBounds(DataGrid, word)) 
+            AddToHashTable(&hash_table, word);
+    }
+    free(word);
     fclose(file);
 
     return hash_table;
 }
 
-void UpdateDataGrid(Grid DataGrid, HashTable HashTable)
+bool IsWithinBounds(DataGrid DataGrid, String Word)
 {
-    int i, length;
+    int length = strlen(Word);
 
-    for(i = 0; i < DataGrid->horizontally->words_count; i++)
-    {
-        length = DataGrid->horizontally->coordinates[i].length;
-        DataGrid->horizontally->coordinates[i].word_possibilities = HashTable->length[length]->words->size;
-    }
+    if (length > DataGrid.word_lengths->max)
+        return false;
 
-    for(i = 0; i < DataGrid->vertically->words_count; i++)
-    {
-        length = DataGrid->vertically->coordinates[i].length;
-        DataGrid->vertically->coordinates[i].word_possibilities = HashTable->length[length]->words->size;
-    }
+    if (DataGrid.word_lengths->exists[length] == false)
+        return false;
+    
+    return true;
 }
+

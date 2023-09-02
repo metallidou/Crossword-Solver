@@ -13,11 +13,17 @@ LDFLAGS += -lm
 
 # set the name of the executable file to compile here
 PROGRAM = crossw
+TEST = test
 
-OBJS = Code/program/main/main.o Code/program/grid/GridVisualization.o Code/program/grid/GridData.o Code/program/dictionary/Dictionary.o Code/program/hash_table/HashTable.o Code/program/vector/Vector.o Code/program/solve/Solve.o Code/program/solve/Sort.o  
+OBJS = Code/program/main/main.o Code/program/grid/VisualGrid.o Code/program/grid/DataGrid.o Code/program/hash_table/HashTable.o Code/program/vector/Vector.o Code/program/dictionary/Dictionary.o Code/program/solve/Solve.o 
+TEST_OBJS = Code/test/test.o Code/program/grid/VisualGrid.o Code/program/grid/DataGrid.o Code/program/hash_table/HashTable.o Code/program/vector/Vector.o Code/program/dictionary/Dictionary.o Code/program/solve/Solve.o
 
 $(PROGRAM): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(PROGRAM)
 
+$(TEST): $(TEST_OBJS)
+	$(CC) $(CFLAGS) $(TEST_OBJS) $(LDFLAGS) -o $(TEST)
+
 clean:
 	rm -f $(PROGRAM) $(OBJS) 
+	rm -f $(TEST) $(TEST_OBJS)
