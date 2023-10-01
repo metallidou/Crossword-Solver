@@ -5,31 +5,36 @@
 
 HashTable ProcessDictionary(DataGrid DataGrid, char* DictionaryFile)
 {
+    // open dictionary file
     FILE *file = fopen(DictionaryFile, "r");
 
+    // initialize hash table
     HashTable hash_table = CreateHashTable(DataGrid);
+    // word is used for reading each file line 
     char* word = malloc(100 * sizeof(char));
 
-    while(fgets(word, 100, file))
+    while(fgets(word, 100, file))                   // get line input
     {
-        word[strlen(word)-1] = 0;               // to remove '\n'
+        word[strlen(word)-1] = 0;                   // to remove '\n'
 
-        if (IsWithinBounds(DataGrid, word)) 
+        if (IsWithinBounds(DataGrid, word))         // if appropriate add to hash table
             AddToHashTable(&hash_table, word);
     }
     free(word);
-    fclose(file);
+    fclose(file);       
 
     return hash_table;
 }
 
 bool IsWithinBounds(DataGrid DataGrid, String Word)
 {
-    int length = strlen(Word);
+    int length = strlen(Word);                      
 
-    if (length > DataGrid.word_lengths->max)
+    // if length of word bigger than crossword limit
+    if (length > DataGrid.word_lengths->max)            
         return false;
 
+    // if length of word cannot be included to crossword
     if (DataGrid.word_lengths->exists[length] == false)
         return false;
     

@@ -5,7 +5,6 @@
 
 typedef char* String;      
 
-// data grid
 typedef struct DataGridSTRUCT DataGrid;
 typedef struct HorizontallySTRUCT Horizontally;
 typedef struct VerticallySTRUCT Vertically;
@@ -13,27 +12,25 @@ typedef struct LengthsSTRUCT Lengths;
 typedef struct CoordinatesSTRUCT Coordinates;
 typedef struct IntersectionsSTRUCT Intersections;
 
-//--------------------------------------- DATA GRID ---------------------------------------------------------------------------------
-
-struct DataGridSTRUCT                   // the Grid gives information about
+struct DataGridSTRUCT                   
 {
     Lengths* word_lengths;               // the Lengths of the words to be placed
-    Horizontally* horizontally;          // grid data horizontally
-    Vertically* vertically;              // grid data vertically
+    Horizontally* horizontally;          // data horizontally
+    Vertically* vertically;              // data vertically
 };
 
 struct HorizontallySTRUCT
 {
-    int dimensions;
+    int dimensions;                     // horizontal dimension of crossword
     int words_count;                    // number of words that can fit horizontally
     Coordinates* gap;                   // information about each word's placement horizontally
 };
 
 struct VerticallySTRUCT
 {
-    int dimensions;
+    int dimensions;                     // vertical dimension of crossword
     int words_count;                    // number of words that can fit vertically
-    Coordinates* gap;                  // information about each word's placement vertically
+    Coordinates* gap;                   // information about each word's placement vertically
 };
 
 struct LengthsSTRUCT              
@@ -50,18 +47,16 @@ struct CoordinatesSTRUCT
     int end_row;                        // row a gap for a word ends
     int end_col;                        // column a gap for a word ends 
     int flag;                           // indicates the gap priority (for filling the gap)
-    bool filled;
-    int index;
-    String word;
-    String constraints;
-    Vector* words_vector;
-    Intersections* intersections;
+    bool filled;                        // true when gap is filled with a word
+    int index;                          // gap index
+    String word;                        // word placed as a solution
+    String constraints;                 // constraints created by other word placements
+    Vector* words_vector;               // word choices that fit several criteria
+    Intersections* intersections;       // information about the gap's intersections with other words
 };
 
 struct IntersectionsSTRUCT
 {
     int num;                            // indicates number of gap intersections
-    int* gap_index;                     // gaps
+    int* gap_index;                     // index array of intersected gaps
 };
-
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------

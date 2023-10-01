@@ -10,24 +10,21 @@ VisualGrid CreateVisualGrid(char* GridFile)
     VisualGrid grid;
     int x, y, i, j;
 
-    // we get grid dimensions
-    x = y = GetGridDimensions(GridFile);  // grid is square
-    grid.x = x;
-    grid.y = y;
+    x = y = GetGridDimensions(GridFile);  
+    grid.x = x;         // width
+    grid.y = y;         // height
 
-    // memory allocation for visual grid
+    // memory allocation to store black boxes
     grid.black_box = malloc(x * sizeof(bool*));
     for(i = 0; i < x; i++)
         grid.black_box[i] = malloc(y * sizeof(bool));
 
-    // at first we assume that all boxes are white
+    // at first we assume that there are no black boxes
     for(i = 0; i < x; i++)              
     {
         for(j = 0; j < y; j++)
             grid.black_box[i][j] = false;
     }    
-
-    // then we get black boxes
     GetBlackBoxes(grid, GridFile);        
 
     return grid;
@@ -39,16 +36,12 @@ int GetGridDimensions(char* GridFile)
     char line[10];
     int start, end, dimensions;
 
-    // open file and read first line
+    file = fopen(GridFile, "r");                    // open file
+    fgets(line, 10, file);                          // read first line
 
-    file = fopen(GridFile, "r");
-    fgets(line, 10, file);
-
-    // get number in first line
-
-    start = 0;
+    start = 0;                                      // number in first line is the dimensions
     end = strlen(line);
-    dimensions = ReadNumber(line, &start, end);
+    dimensions = ReadNumber(line, &start, end);     // convert string to a number 
     fclose(file);
 
     return dimensions;
@@ -79,26 +72,23 @@ void GetCoordinates(char* String, int *X, int *Y)
     start = 0;
     end = strlen(String);
 
-    // to get coordinate X
-    *X = ReadNumber(String, &start, end);
-
-    // to get coordinate Y
-    *Y = ReadNumber(String, &start, end);
+    *X = ReadNumber(String, &start, end);           // to get coordinate X
+    *Y = ReadNumber(String, &start, end);           // to get coordinate Y
 }
 
 int ReadNumber(char* Text, int *StartIndex, int EndIndex)
 {
     bool get_int = false;
-    int integer = 0;
+    int integer = 0;    
 
     for(int i = *StartIndex; i <= EndIndex; i++)
     {
-        if((isspace(Text[i]) && get_int == true))      
+        if((isspace(Text[i]) && get_int == true))       // if an integer is read and we encounter a space, we must return the number      
         {
             *StartIndex = i;
             return integer;
         }
-        if (IsInteger(Text[i]))                   // convert to integer
+        if (IsInteger(Text[i]))                         // convert to integer
         {
             integer = integer*10 + (Text[i] - '0');
             get_int = true;
