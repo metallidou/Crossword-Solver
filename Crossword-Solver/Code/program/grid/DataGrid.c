@@ -26,12 +26,14 @@ DataGrid ProcessDataGrid(VisualGrid VisualGrid)
         grid.word_lengths->exists[i] = false;
     
     // Find the Number of Words that fit Horizontally to the grid
-    grid.horizontally = malloc(sizeof(Horizontally)); 
+    grid.horizontally = malloc(sizeof(Horizontally));
+    grid.horizontally->dimensions = x; 
     grid = NumberWordsFitHorizontally(grid, VisualGrid);
     grid.horizontally->gap = malloc(grid.horizontally->words_count * sizeof(Coordinates));
 
     // Find the Number of Words that fit Vertically to the grid
     grid.vertically = malloc(sizeof(Vertically)); 
+    grid.vertically->dimensions = y;
     grid = NumberWordsFitVertically(grid, VisualGrid);
     grid.vertically->gap = malloc(grid.vertically->words_count * sizeof(Coordinates));
 

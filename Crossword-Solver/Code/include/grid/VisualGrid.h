@@ -1,7 +1,6 @@
-#ifndef VISUAL_GRID_H
-#define VISUAL_GRID_H
+#pragma once
 
-#include "VisualGridSTRUCT.h"
+#include "struct/VisualGridSTRUCT.h"
 
 VisualGrid CreateVisualGrid(char* GridFile);
 int GetGridDimensions(char* GridFile);
@@ -10,5 +9,4 @@ void GetCoordinates(char* String, int *X, int *Y);
 int ReadNumber(char* Text, int *StartIndex, int EndIndex);
 bool IsInteger(char ch);
 
-#endif
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------

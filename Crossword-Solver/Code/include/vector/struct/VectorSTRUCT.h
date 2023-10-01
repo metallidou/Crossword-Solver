@@ -1,9 +1,13 @@
 #pragma once
 
-#include "struct/HashTableSTRUCT.h"
-#include "../vector/Vector.h"
+typedef struct VECTOR Vector;
+typedef char* String;
 
-HashTable CreateHashTable(DataGrid DataGrid);
-void AddToHashTable(HashTable* HashTable, char* Word);
+struct VECTOR
+{
+    String* word;
+    int capacity;
+    int size;
+};
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------

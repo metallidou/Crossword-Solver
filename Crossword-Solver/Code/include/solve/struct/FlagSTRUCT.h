@@ -1,9 +1,13 @@
 #pragma once
 
-#include "struct/HashTableSTRUCT.h"
-#include "../vector/Vector.h"
+#include <stdbool.h>
 
-HashTable CreateHashTable(DataGrid DataGrid);
-void AddToHashTable(HashTable* HashTable, char* Word);
+typedef struct FlagSTRUCT Flag; 
+
+struct FlagSTRUCT
+{
+    bool horizontal_gap;
+    int index;
+};
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
