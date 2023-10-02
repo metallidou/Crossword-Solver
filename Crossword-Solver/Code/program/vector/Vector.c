@@ -41,3 +41,10 @@ int VectorEmpty(Vector Vector)
 {
     return (Vector.size == 0);
 }
+
+void FreeVector(Vector* Vector)
+{
+    for (int i = 0; i < Vector->size; i++)
+        free(Vector->word[i]);
+    free(Vector->word);
+}

@@ -189,3 +189,29 @@ DataGrid GapLengthsVertically(DataGrid DataGrid, VisualGrid VisualGrid)
     }
     return DataGrid;
 }
+
+void FreeDataGrid(DataGrid* DataGrid)
+{
+    for (int i = 0; i < DataGrid->horizontally->words_count; i++)
+    {
+        free(DataGrid->horizontally->gap[i].intersections->gap_index);
+        free(DataGrid->horizontally->gap[i].intersections);
+        free(DataGrid->horizontally->gap[i].constraints);
+        free(DataGrid->horizontally->gap[i].word);
+    }
+    free(DataGrid->horizontally->gap);
+    free(DataGrid->horizontally);
+    
+    for (int i = 0; i < DataGrid->vertically->words_count; i++)
+    {
+        free(DataGrid->vertically->gap[i].intersections->gap_index);
+        free(DataGrid->vertically->gap[i].intersections);
+        free(DataGrid->vertically->gap[i].constraints);
+        free(DataGrid->vertically->gap[i].word);
+    }
+    free(DataGrid->vertically->gap);
+    free(DataGrid->vertically);
+
+    free(DataGrid->word_lengths->exists);
+    free(DataGrid->word_lengths);
+}

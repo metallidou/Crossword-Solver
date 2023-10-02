@@ -8,7 +8,7 @@
 typedef Vector Words;       // another way to symbolize a vector of words
 
 // get a dictionary with words of a constraint
-Words AttachDictionary(Coordinates Gap, HashTable Dictionary);
+Words* AttachDictionary(Coordinates Gap, HashTable Dictionary);
 
 // get a word that can fit in the gap
 String FindSuitableWord(Coordinates* Gap, HashTable Dictionary);

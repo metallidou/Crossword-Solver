@@ -101,3 +101,10 @@ bool IsInteger(char ch)
 {
     return (ch >= '0' && ch <= '9');
 }
+
+void FreeVisualGrid(VisualGrid* VisualGrid)
+{
+    for (int i = 0; i < VisualGrid->x; i++)
+        free(VisualGrid->black_box[i]);
+    free(VisualGrid->black_box);    
+}

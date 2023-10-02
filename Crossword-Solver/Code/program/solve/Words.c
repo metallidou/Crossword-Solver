@@ -49,7 +49,7 @@ bool IsWordAcceptable(DataGrid DataGrid, Coordinates Gap, HashTable Dictionary)
     return true;
 }
 
-Words AttachDictionary(Coordinates Gap, HashTable Dictionary)
+Words* AttachDictionary(Coordinates Gap, HashTable Dictionary)
 {
     int index, possibiities = INT_MAX;
     bool has_constraints = false;
@@ -76,25 +76,25 @@ Words AttachDictionary(Coordinates Gap, HashTable Dictionary)
 
     // then return the words vector with words of a length
     if (has_constraints == false)                       
-        return Dictionary.length[Gap.length].words;
+        return &(Dictionary.length[Gap.length].words);
     // else return a words vector with a constraint
-    return Dictionary.length[Gap.length].position[index].letter[(int)(letter)-97].words;
+    return &(Dictionary.length[Gap.length].position[index].letter[(int)(letter)-97].words);
 }
 
 int GetNumberOfSuitableWords(Coordinates Gap, HashTable Dictionary)
 {
-    Words dictionary = AttachDictionary(Gap, Dictionary);       // get vector of words
+    Words* dictionary = AttachDictionary(Gap, Dictionary);       // get vector of words
     int count = 0;
     bool suitable;
 
-    for (int i = 0; i < dictionary.size; i++)
+    for (int i = 0; i < dictionary->size; i++)
     {
         suitable = true;
         for (int j = 0; j < Gap.length; j++)
         {
             if (Gap.constraints[j] == ' ')                      // no additional constraint
                 continue;
-            if (Gap.constraints[j] != dictionary.word[i][j])    // the word is not suitable
+            if (Gap.constraints[j] != dictionary->word[i][j])    // the word is not suitable
                 suitable = false;
         }
         if (suitable == true)   // another word that can be placed is found                        
@@ -105,21 +105,14 @@ int GetNumberOfSuitableWords(Coordinates Gap, HashTable Dictionary)
 
 String FindSuitableWord(Coordinates* Gap, HashTable Dictionary)
 {
-    Words* dictionary = malloc(sizeof(Vector));
     bool suitable;
 
     // index of last word used from words vector
     // if -1, there is no words vector attached
     if (Gap->index == -1)   
-    {
-        *dictionary = AttachDictionary(*Gap, Dictionary);
-        // get new words vector
-        Gap->words_vector = dictionary; 
-    }
-    else
-        dictionary = Gap->words_vector;     // words vector is already set
+        Gap->words_vector = AttachDictionary(*Gap, Dictionary);
 
-    for (int i = Gap->index+1; i < dictionary->size; i++)
+    for (int i = Gap->index+1; i < Gap->words_vector->size; i++)
     {
         suitable = true;
 
@@ -127,14 +120,14 @@ String FindSuitableWord(Coordinates* Gap, HashTable Dictionary)
         {
             if (Gap->constraints[j] == ' ')     // no contsraint
                 continue;
-            if (Gap->constraints[j] != dictionary->word[i][j])  // not suitable
+            if (Gap->constraints[j] != Gap->words_vector->word[i][j])  // not suitable
                 suitable = false;
         }
         
         if (suitable == true)   // then a word that can be placed is found
         {
             Gap->index = i;
-            return dictionary->word[i];
+            return Gap->words_vector->word[i];
         }
     }
     // then no suitable word is found
@@ -146,6 +139,7 @@ void PlaceWord(DataGrid* DataGrid, Coordinates* Gap, String Word, int *FLAG)
 {
     Gap->filled = true;             // word is placed
     strcpy(Gap->word, Word);
+
     AddConstraints(DataGrid, *Gap);
     (*FLAG)++;                      // to fill the next gap
 }

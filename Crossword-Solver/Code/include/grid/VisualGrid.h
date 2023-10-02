@@ -19,3 +19,6 @@ int ReadNumber(char* Text, int *StartIndex, int EndIndex);
 
 // declares whether input is integer 
 bool IsInteger(char ch);
+
+// free memory
+void FreeVisualGrid(VisualGrid* VisualGrid);

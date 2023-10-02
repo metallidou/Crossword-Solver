@@ -14,3 +14,6 @@ void VectorRemove(Vector* Vector, String Word);
 
 // is empty
 int VectorEmpty(Vector Vector);
+
+// free memory
+void FreeVector(Vector* Vector);

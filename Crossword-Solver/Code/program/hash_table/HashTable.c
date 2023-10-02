@@ -51,3 +51,19 @@ void AddToHashTable(HashTable* HashTable, char* Word)
         VectorInsert(&(HashTable->length[length].position[i].letter[index].words), Word);
     }
 }
+
+void FreeHashTable(HashTable* HashTable)
+{
+    for (int i = 0; i <= HashTable->max_length; i++)
+    {
+        for (int j = 0; j <= i; j++)
+        {
+            for (int k = 0; k < 26; k++)
+                FreeVector(&(HashTable->length[i].position[j].letter[k].words));
+            free(HashTable->length[i].position[j].letter);
+        }
+        FreeVector((&HashTable->length[i].words));
+        free(HashTable->length[i].position);
+    }
+    free(HashTable->length);   
+}

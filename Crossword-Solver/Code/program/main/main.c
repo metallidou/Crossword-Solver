@@ -14,6 +14,8 @@ extern bool SOLUTION;
 char** VisualizeResult(DataGrid DataGrid, VisualGrid VisualGrid);
 // print the contents of the char table as result
 void PrintResult(DataGrid DataGrid, VisualGrid VisualGrid);
+// free memory
+void FreeResultTable(char** ResultTable, int Width);
 
 int main(int argc, char** argv)
 {
@@ -27,6 +29,10 @@ int main(int argc, char** argv)
 
     Solve(&data_grid, hash_table);                          // attempts to solve crossword
     PrintResult(data_grid, visual_grid);                    // prints final result
+
+    FreeDataGrid(&data_grid);
+    FreeVisualGrid(&visual_grid);
+    FreeHashTable(&hash_table);
 
     return 0;
 }
@@ -98,7 +104,16 @@ void PrintResult(DataGrid DataGrid, VisualGrid VisualGrid)
             printf("\n");    
         }
         printf("\n");
+
+        FreeResultTable(result, VisualGrid.x);
     }
     else
         printf("CROSSWORD CANNOT BE SOLVED!\n");        // no solution was detected
+}
+
+void FreeResultTable(char** ResultTable, int Width)
+{
+    for (int i = 0; i < Width; i++)
+        free(ResultTable[i]);
+    free(ResultTable);
 }

@@ -126,6 +126,7 @@ void FillCrossword(DataGrid* DataGrid, HashTable Dictionary, Flag* Flags)
         }
         return;
     }
+    free(Flags);
 }
 
 void FillNext(DataGrid* DataGrid, HashTable Dictionary, Flag* Flags, int* FLAG)
