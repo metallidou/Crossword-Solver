@@ -17,7 +17,7 @@ It sorts words according to length and letters at certain positions.
 ## Solving Procedure
 In order to have a solution all grid gaps need to be filled.<br />
 ### Order Of Filling Gaps:
-This can be done with two different approaches:<br /><br />
+Gap filling order has two different approaches:<br /><br />
 **Approach 1:** Gaps with less word choices are filled first.<br />
 **Approach 2:** Gaps with a greater number of intersections are filled first<br /><br />
 I have concluded that the first approach works best, for most cases, although the second approach is more efficient at times
