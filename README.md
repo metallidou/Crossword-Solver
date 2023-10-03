@@ -45,7 +45,11 @@ This means that a previously placed word has resulted in a dead end, so it needs
 It is assumed that the "problematic" word is the **last placed word**.<br />
 
 ## How to run program?
+To compile program:
 ```
-./crossw Others/crosswords/CrosswordFile Others/dictionaries/DictionaryFile
-// ex. ./crossw Others/crosswords/Crossword1.txt Others/dictionaries/Words.txt
+make
+```
+To run program:
+```
+./crossw Others/crosswords/'CrosswordFile' Others/dictionaries/'DictionaryFile'
 ```
