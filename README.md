@@ -1,7 +1,7 @@
 # Crossword-Solver
 This is the finished **crossword solving program** I made as a University project.
 
-### How does it work?
+### - How does it work?
 This reads a crossword grid file and a dictionary file and attempts to find first possible solution (if it exists).
 
 ### Grid:
@@ -16,7 +16,7 @@ It sorts words according to length and letters at certain positions.
 
 ## Solving Procedure
 In order to have a solution all grid gaps need to be filled.<br />
-### Order Of Filling Gaps:
+### 1. Order Of Filling Gaps:
 Gap filling order has two different approaches:<br /><br />
 **Approach 1:** Gaps with less word choices are filled first.<br />
 **Approach 2:** Gaps with a greater number of intersections are filled first<br /><br />
@@ -27,19 +27,19 @@ I have concluded that the first approach works best, for most cases, although th
 The order of filling the gaps is decided during solving.<br />
 **Flags** signify the filling priority of each gap.
 
-### Constrained Word Search:
+### 2. Constrained Word Search:
 While filling the gaps with words, other gaps become constrained, as they can only be filled with words with letters on certaint positions.<br />
 This is the reason a data structure for efficient word search is needed.
 #### Hash Table for Word Search
 The Hash Table structure can be used for accessing words of a **specific length** and all words with a **letter** on a specific **position** at a time.<br /> 
 This data structure in combination with a partial linear search, for additional constraints, offers a more efficient search method.<br />
 
-### Check:
+### 3. Check:
 Before placing a word in a gap, as a potential solution, **its validity needs to be checked**.<br /><br />
 This means that the word needs to be checked, so that it won't create non valid constraints for other words to be placed.<br />
 This speeds up the solving procedure, as it **minimizes unnecessary backtracking operations**.<br />
 
-### Backtracking:
+### 4. Backtracking:
 A ***Backtracking Operation*** is performed when a word with constraints cannot be found to fill a gap.<br /><br />
 This means that a previously placed word has resulted in a dead end, so it needs to be replaced with another one.<br />
 It is assumed that the "problematic" word is the **last placed word**.<br />
