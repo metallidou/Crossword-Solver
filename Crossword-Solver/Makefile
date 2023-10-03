@@ -16,7 +16,6 @@ PROGRAM = crossw
 TEST = test
 
 OBJS = Code/program/main/main.o Code/program/grid/VisualGrid.o Code/program/grid/DataGrid.o Code/program/hash_table/HashTable.o Code/program/vector/Vector.o Code/program/dictionary/Dictionary.o Code/program/solve/Solve.o Code/program/solve/Backtracking.o Code/program/solve/Words.o Code/program/solve/Gap.o
-TEST_OBJS = Code/test/test.o Code/program/grid/VisualGrid.o Code/program/grid/DataGrid.o Code/program/hash_table/HashTable.o Code/program/vector/Vector.o Code/program/dictionary/Dictionary.o Code/program/solve/Solve.o Code/program/solve/Backtracking.o Code/program/solve/Words.o Code/program/solve/Gap.o
 
 $(PROGRAM): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(PROGRAM)
