@@ -1,5 +1,5 @@
 # Crossword-Solver
-This is the finished **crossword solving program** I made as a University project.<br />
+This is the finished **crossword solving program** I made as a University project, in the course 'Introduction to Porgramming'.<br />
 https://cgi.di.uoa.gr/~ip/iphw2223_4.pdf
 
 ### - How does it work?
