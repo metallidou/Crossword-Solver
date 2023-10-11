@@ -1,5 +1,6 @@
 # Crossword-Solver
-This is the finished **crossword solving program** I made as a University project.
+This is the finished **crossword solving program** I made as a University project.<br />
+https://cgi.di.uoa.gr/~ip/iphw2223_4.pdf
 
 ### - How does it work?
 This reads a crossword grid file and a dictionary file and attempts to find first possible solution (if it exists).
