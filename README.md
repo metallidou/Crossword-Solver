@@ -35,10 +35,10 @@ This is the reason a data structure for efficient word search is needed.
 The Hash Table structure can be used for accessing words of a **specific length** and all words with a **letter** on a specific **position** at a time.<br /> 
 This data structure in combination with a partial linear search, for additional constraints, offers a more efficient search method.<br />
 
-### 3. Check:
-Before placing a word in a gap, as a potential solution, **its validity needs to be checked**.<br /><br />
-This means that the current choice needs to be checked, so that it won't create constraints that correspond to non-existing words.<br />
-This speeds up the solving procedure, as it **minimizes unnecessary backtracking operations**.<br />
+### 3. Forward Checking:
+Before placing a word in a gap, as a potential solution, **it needs to be checked in advance**.<br /><br />
+Basically, it needs to be made sure that the current word choice won't make up additional constraints that correspond to non-existing words.<br />
+This speeds up the solving procedure, as it **prevents unnecessary backtracking operations**.<br />
 
 ### 4. Backtracking:
 A ***Backtracking Operation*** is performed when a word with constraints cannot be found to fill a gap.<br /><br />
