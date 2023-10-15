@@ -17,13 +17,14 @@ void IntersectionsHorizontally(DataGrid* DataGrid);
 void IntersectionsVertically(DataGrid* DataGrid);
 
 // set gaps filling order, according to 2 approaches
-void SetGapsFillingOrder(DataGrid* DataGrid, HashTable Dictionary, Flag* Flags, int CurrentFlag, int GapOrder);
+void SetGapsFillingOrder(DataGrid* DataGrid, HashTable HashTable, Flag* Flags, int CurrentFlag, int GapOrder);
+void SetFirstGapToFill(DataGrid* DataGrid, Flag* Flags);
 // 1st approach:    
 //Fill in first the gaps with the smallest number of possible words that can be placed 
-void SetGapsFillingOrder_1(DataGrid* DataGrid, HashTable Dictionary, Flag* Flags, int CurrentFlag);
+void SetGapsFillingOrder_1(DataGrid* DataGrid, HashTable HashTable, Flag* Flags, int CurrentFlag);
 // 2nd approach:    
 //Fill in first the gaps with the most intersections
-void SetGapsFillingOrder_2(DataGrid* DataGrid, HashTable Dictionary, Flag* Flags, int CurrentFlag);
+void SetGapsFillingOrder_2(DataGrid* DataGrid, HashTable HashTable, Flag* Flags, int CurrentFlag);
 
 // constraint management functions
 void AddConstraints(DataGrid* DataGrid, Coordinates Gap);

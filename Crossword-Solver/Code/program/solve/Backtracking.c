@@ -5,12 +5,14 @@ void Backtracking(DataGrid* DataGrid, Coordinates Gap, Flag* Flags, int *FLAG)
     // we need to find a problematic gap and remove its value
     Coordinates faulty = GetFaultyGap(*DataGrid, Flags, *FLAG);            
 
-    if (Flags[faulty.flag].horizontal_gap)                                                      // then faulty is vertical
+    // then faulty is vertical
+    if (Flags[faulty.flag].horizontal_gap)                                                      
         RemoveWord(DataGrid, &(DataGrid->horizontally->gap[Flags[faulty.flag].index]), FLAG);
-    else                                                                                        // then faulty is horizontal
+    else                                                                                        
         RemoveWord(DataGrid, &(DataGrid->vertically->gap[Flags[faulty.flag].index]), FLAG);
 
-    *FLAG = faulty.flag;    // flag is changed to the faulty flag, so that i can be refilled
+    // flag is changed to the faulty flag, so that it can be refilled
+    *FLAG = faulty.flag;    
 }
 
 Coordinates GetFaultyGap(DataGrid DataGrid, Flag* Flags, int CurrentFlag)
@@ -23,9 +25,10 @@ Coordinates GetFaultyGap(DataGrid DataGrid, Flag* Flags, int CurrentFlag)
 
 void RemoveConstraints(DataGrid* DataGrid, Coordinates Gap)
 {
-    if(IsHorizontalGap(Gap))                            // remove vertically
+    // remove vertically
+    if(IsHorizontalGap(Gap))                            
         RemoveConstraintsVertically(DataGrid, Gap);
-    else                                                // remove horizontally
+    else                                                
         RemoveConstraintsHorizontally(DataGrid, Gap);  
 }
 
@@ -57,13 +60,15 @@ void RemoveConstraintsVertically(DataGrid* DataGrid, Coordinates Gap)
 
 void RemoveWord(DataGrid* DataGrid, Coordinates* Gap, int* FLAG)
 {
-    Gap->filled = false;        // gap is empty now
+    // gap is empty now
+    Gap->filled = false;        
     
     for(int i = 0; i < Gap->length; i++)
         Gap->word[i] = ' ';
 
     RemoveConstraints(DataGrid, *Gap);   
 
-    if (*FLAG > 0)      // flag is set so that the problematic gap can be refilled
+    // flag is set so that the problematic gap can be refilled
+    if (*FLAG > 0)      
         (*FLAG)--; 
 }

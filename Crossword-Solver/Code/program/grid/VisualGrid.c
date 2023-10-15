@@ -11,8 +11,8 @@ VisualGrid CreateVisualGrid(char* GridFile)
     int x, y, i, j;
 
     x = y = GetGridDimensions(GridFile);  
-    grid.x = x;         // width
-    grid.y = y;         // height
+    grid.x = x;         
+    grid.y = y;         
 
     // memory allocation to store black boxes
     grid.black_box = malloc(x * sizeof(bool*));
@@ -33,17 +33,14 @@ VisualGrid CreateVisualGrid(char* GridFile)
 int GetGridDimensions(char* GridFile)
 {
     FILE *file;
-    char line[10];
-    int start, end, dimensions;
+    int dimensions;
 
-    file = fopen(GridFile, "r");                    // open file
-    fgets(line, 10, file);                          // read first line
-
-    start = 0;                                      // number in first line is the dimensions
-    end = strlen(line);
-    dimensions = ReadNumber(line, &start, end);     // convert string to a number 
+    file = fopen(GridFile, "r");                    
+    
+    // number in first line is the dimensions
+    fscanf(file, "%d", &dimensions);
+    
     fclose(file);
-
     return dimensions;
 }
 
@@ -57,49 +54,10 @@ void GetBlackBoxes(VisualGrid Grid, char* GridFile)
     fgets(line, 100, file);       
 
     // get all text file lines, read coordinates and set black boxes
-    while(fgets(line, 100, file))
-    {   
-        GetCoordinates(line, &x, &y);
-        Grid.black_box[x-1][y-1] = true;
-    }
+    while (fscanf(file, "%d %d", &x, &y) == 2) 
+        Grid.black_box[x - 1][y - 1] = true;
+    
     fclose(file);
-}
-
-void GetCoordinates(char* String, int *X, int *Y)
-{
-    int start, end;
-
-    start = 0;
-    end = strlen(String);
-
-    *X = ReadNumber(String, &start, end);           // to get coordinate X
-    *Y = ReadNumber(String, &start, end);           // to get coordinate Y
-}
-
-int ReadNumber(char* Text, int *StartIndex, int EndIndex)
-{
-    bool get_int = false;
-    int integer = 0;    
-
-    for(int i = *StartIndex; i <= EndIndex; i++)
-    {
-        if((isspace(Text[i]) && get_int == true))       // if an integer is read and we encounter a space, we must return the number      
-        {
-            *StartIndex = i;
-            return integer;
-        }
-        if (IsInteger(Text[i]))                         // convert to integer
-        {
-            integer = integer*10 + (Text[i] - '0');
-            get_int = true;
-        }
-    }
-    return integer;
-}
-
-bool IsInteger(char ch)
-{
-    return (ch >= '0' && ch <= '9');
 }
 
 void FreeVisualGrid(VisualGrid* VisualGrid)

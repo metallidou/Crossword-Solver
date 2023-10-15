@@ -13,12 +13,15 @@ HashTable ProcessDictionary(DataGrid DataGrid, char* DictionaryFile)
     // word is used for reading each file line 
     char* word = malloc(100 * sizeof(char));
 
-    while(fgets(word, 100, file))                   // get line input
+    // get line input
+    while(fgets(word, 100, file))                   
     {
-        word[strlen(word)-1] = 0;                   // to remove '\n'
+        // to remove '\n'
+        word[strlen(word)-1] = 0;                   
 
-        if (IsWithinBounds(DataGrid, word))         // if appropriate add to hash table
-            AddToHashTable(&hash_table, word);
+        // if appropriate add to hash table
+        if (IsWithinBounds(DataGrid, word))         
+                AddToHashTable(&hash_table, word);
     }
     free(word);
     fclose(file);       

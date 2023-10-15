@@ -23,12 +23,17 @@ int main(int argc, char** argv)
     DataGrid data_grid;
     HashTable hash_table;
 
-    visual_grid = CreateVisualGrid(argv[1]);                // read the crossword file and create a struct containing its visual complonents
-    data_grid = ProcessDataGrid(visual_grid);               // analyse further the visual grid and get information about the solution coordinates 
-    hash_table = ProcessDictionary(data_grid, argv[2]);     // analyse the dictionary file and create a hash table, for search purposes
+    // read the crossword file and create a struct containing its visual complonents
+    visual_grid = CreateVisualGrid(argv[1]);                
+    // analyse further the visual grid and get information about the solution coordinates
+    data_grid = ProcessDataGrid(visual_grid);               
+    // analyse the dictionary file and create a hash table, for search purposes 
+    hash_table = ProcessDictionary(data_grid, argv[2]);     
 
-    Solve(&data_grid, hash_table);                          // attempts to solve crossword
-    PrintResult(data_grid, visual_grid);                    // prints final result
+    // attempts to solve crossword
+    Solve(&data_grid, hash_table);                          
+    // prints final result
+    PrintResult(data_grid, visual_grid);                    
 
     FreeDataGrid(&data_grid);
     FreeVisualGrid(&visual_grid);
@@ -99,7 +104,7 @@ void PrintResult(DataGrid DataGrid, VisualGrid VisualGrid)
                 if(result[i][j] == '#')     
                     printf("###");
                 else    
-                    printf(" %c ", result[i][j]);       // print letter
+                    printf(" %c ", result[i][j]);       
             }
             printf("\n");    
         }
@@ -108,7 +113,7 @@ void PrintResult(DataGrid DataGrid, VisualGrid VisualGrid)
         FreeResultTable(result, VisualGrid.x);
     }
     else
-        printf("CROSSWORD CANNOT BE SOLVED!\n");        // no solution was detected
+        printf("CROSSWORD CANNOT BE SOLVED!\n");        
 }
 
 void FreeResultTable(char** ResultTable, int Width)

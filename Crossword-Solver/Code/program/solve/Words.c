@@ -3,7 +3,7 @@
 #include <limits.h>
 #include "../../include/solve/Words.h"
 
-bool IsWordAcceptable(DataGrid DataGrid, Coordinates Gap, HashTable Dictionary)
+bool IsWordAcceptable(DataGrid DataGrid, Coordinates Gap, HashTable HashTable)
 {
     int index, temp;
 
@@ -20,7 +20,7 @@ bool IsWordAcceptable(DataGrid DataGrid, Coordinates Gap, HashTable Dictionary)
             if (!DataGrid.vertically->gap[index].filled)    
             {
                 // not suitable word can be found
-                if (!FindSuitableWord(&(DataGrid.vertically->gap[index]), Dictionary))
+                if (!FindSuitableWord(&(DataGrid.vertically->gap[index]), HashTable))
                 {
                     DataGrid.vertically->gap[index].index = temp;
                     return false;
@@ -37,7 +37,7 @@ bool IsWordAcceptable(DataGrid DataGrid, Coordinates Gap, HashTable Dictionary)
             if (!DataGrid.horizontally->gap[index].filled)
             {
                 // not suitable word can be found
-                if (!FindSuitableWord(&(DataGrid.horizontally->gap[index]), Dictionary))
+                if (!FindSuitableWord(&(DataGrid.horizontally->gap[index]), HashTable))
                 {
                     DataGrid.horizontally->gap[index].index = temp;
                     return false;
@@ -49,7 +49,7 @@ bool IsWordAcceptable(DataGrid DataGrid, Coordinates Gap, HashTable Dictionary)
     return true;
 }
 
-Words* AttachDictionary(Coordinates Gap, HashTable Dictionary)
+Words* AttachHashTable(Coordinates Gap, HashTable HashTable)
 {
     int index, possibiities = INT_MAX;
     bool has_constraints = false;
@@ -60,14 +60,15 @@ Words* AttachDictionary(Coordinates Gap, HashTable Dictionary)
         // ch represents a constrained letter 
         ch = Gap.constraints[i];
         
-        if (ch == ' ')  // free letter
+        // free letter
+        if (ch == ' ')  
             continue;
         
         // we try to find the best possible vector with constrained words, in terms of possibilities
-        // the dictionary offers a vector of words with only one constraint at the time
-        if (Dictionary.length[Gap.length].position[i].letter[(int)(ch)-97].words.size < possibiities)
+        // the HashTable offers a vector of words with only one constraint at the time
+        if (HashTable.length[Gap.length].position[i].letter[(int)(ch)-97].words.size < possibiities)
         {
-            possibiities = Dictionary.length[Gap.length].position[i].letter[(int)(ch)-97].words.size;
+            possibiities = HashTable.length[Gap.length].position[i].letter[(int)(ch)-97].words.size;
             index = i;
             letter = ch;
             has_constraints = true;
@@ -76,41 +77,44 @@ Words* AttachDictionary(Coordinates Gap, HashTable Dictionary)
 
     // then return the words vector with words of a length
     if (has_constraints == false)                       
-        return &(Dictionary.length[Gap.length].words);
+        return &(HashTable.length[Gap.length].words);
     // else return a words vector with a constraint
-    return &(Dictionary.length[Gap.length].position[index].letter[(int)(letter)-97].words);
+    return &(HashTable.length[Gap.length].position[index].letter[(int)(letter)-97].words);
 }
 
-int GetNumberOfSuitableWords(Coordinates Gap, HashTable Dictionary)
+int GetNumberOfSuitableWords(Coordinates Gap, HashTable HashTable)
 {
-    Words* dictionary = AttachDictionary(Gap, Dictionary);       // get vector of words
-    int count = 0;
+    // get vector of words
+    Words* dictionary = AttachHashTable(Gap, HashTable);       
     bool suitable;
+    int count = 0;
 
     for (int i = 0; i < dictionary->size; i++)
     {
         suitable = true;
         for (int j = 0; j < Gap.length; j++)
         {
-            if (Gap.constraints[j] == ' ')                      // no additional constraint
+            // no additional constraint
+            if (Gap.constraints[j] == ' ')                      
                 continue;
-            if (Gap.constraints[j] != dictionary->word[i][j])    // the word is not suitable
+            if (Gap.constraints[j] != dictionary->word[i][j])    
                 suitable = false;
         }
-        if (suitable == true)   // another word that can be placed is found                        
+        // another word that can be placed is found       
+        if (suitable == true)                    
             count++;
     }
     return count;
 }
 
-String FindSuitableWord(Coordinates* Gap, HashTable Dictionary)
+String FindSuitableWord(Coordinates* Gap, HashTable HashTable)
 {
     bool suitable;
 
     // index of last word used from words vector
     // if -1, there is no words vector attached
     if (Gap->index == -1)   
-        Gap->words_vector = AttachDictionary(*Gap, Dictionary);
+        Gap->words_vector = AttachHashTable(*Gap, HashTable);
 
     for (int i = Gap->index+1; i < Gap->words_vector->size; i++)
     {
@@ -118,13 +122,14 @@ String FindSuitableWord(Coordinates* Gap, HashTable Dictionary)
 
         for (int j = 0; j < Gap->length; j++)
         {
-            if (Gap->constraints[j] == ' ')     // no contsraint
+            // no constraint
+            if (Gap->constraints[j] == ' ')     
                 continue;
-            if (Gap->constraints[j] != Gap->words_vector->word[i][j])  // not suitable
+            if (Gap->constraints[j] != Gap->words_vector->word[i][j])  
                 suitable = false;
         }
-        
-        if (suitable == true)   // then a word that can be placed is found
+        // then a word that can be placed is found
+        if (suitable == true)   
         {
             Gap->index = i;
             return Gap->words_vector->word[i];
@@ -137,9 +142,11 @@ String FindSuitableWord(Coordinates* Gap, HashTable Dictionary)
 
 void PlaceWord(DataGrid* DataGrid, Coordinates* Gap, String Word, int *FLAG)
 {
-    Gap->filled = true;             // word is placed
+    // word is placed
+    Gap->filled = true;             
     strcpy(Gap->word, Word);
 
     AddConstraints(DataGrid, *Gap);
-    (*FLAG)++;                      // to fill the next gap
+    // to fill the next gap
+    (*FLAG)++;                      
 }
