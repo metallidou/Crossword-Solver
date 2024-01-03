@@ -16,7 +16,7 @@ It is quite useful, as it is provides needed information throughout the whole so
 It sorts words according to length and letters at certain positions.
 
 ## Solving Procedure
-In order to have a solution, all grid gaps need to be filled.<br />
+In order to have a solution, all grid gaps need to be filled (both approaches follow a combination of static and dynamic variable ordering).<br />
 ### 1. Order Of Filling Gaps:
 Gap filling order is determined using two different approaches:<br /><br />
 **Approach 1:** Gaps with less word possibilities are filled first.<br />
