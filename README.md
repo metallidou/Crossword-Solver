@@ -16,9 +16,10 @@ It is quite useful, as it is provides needed information throughout the whole so
 It sorts words according to length and letters at certain positions.
 
 ## Solving Procedure
-In order to have a solution, all grid gaps need to be filled (both approaches follow a combination of static and dynamic variable ordering).<br />
+In order to have a solution, all grid gaps need to be filled.<br />
 ### 1. Order Of Filling Gaps:
-Gap filling order is determined using two different approaches:<br /><br />
+Gap filling order is determined using two different approaches:<br />
+(both approaches follow a combination of static and dynamic variable ordering)<br /><br /> 
 **Approach 1:** Gaps with less word possibilities are filled first.<br />
 **Approach 2:** Gaps with a greater number of intersections are filled first<br /><br />
 I have concluded that the first approach works best, for most cases, although the second approach is more efficient at times
