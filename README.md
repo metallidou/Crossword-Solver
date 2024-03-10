@@ -26,7 +26,6 @@ I have concluded that the first approach works best, for most cases, although th
 > approach 1 for Crossword5.txt, MoreWords.txt less efficient than approach 2<br />
 > approach 1 for Extra40.txt, Words.txt more efficient than approach 2<br />
 
-The order of filling the gaps is decided during solving.<br />
 **Flags** signify the filling priority of each gap.
 
 ### 2. Constrained Word Search:
